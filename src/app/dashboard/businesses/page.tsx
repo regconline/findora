@@ -23,7 +23,7 @@ export default async function MyBusinessesPage({ searchParams }: { searchParams:
               <Card className="relative flex items-center gap-4 p-5 hover:shadow-raised">
                 <BusinessLogo path={b.logo_path} name={b.name} />
                 <div className="min-w-0 flex-1">
-                  <Link href={`/dashboard/businesses/${b.id}`} className="font-semibold text-navy-900 after:absolute after:inset-0">{b.name}</Link>
+                  <Link href={`/dashboard/businesses/${b.id}`} className="font-semibold text-heading after:absolute after:inset-0">{b.name}</Link>
                   <div className="mt-1"><StatusBadge status={b.status} /></div>
                 </div>
               </Card>

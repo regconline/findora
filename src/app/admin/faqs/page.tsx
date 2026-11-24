@@ -37,7 +37,7 @@ export default async function AdminFaqs() {
             <li key={f.id} className="px-5 py-4 sm:px-6">
               <details>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
-                  <span className="font-medium text-navy-900">{f.question}</span>
+                  <span className="font-medium text-heading">{f.question}</span>
                   <span className="flex shrink-0 items-center gap-2 text-xs text-muted">{f.audience}{f.show_on_home ? " · home" : ""} <StatusBadge status={f.is_published ? "published" : "draft"} /></span>
                 </summary>
                 <ActionForm action={saveFaqAction.bind(null, f.id)} className="mt-4 grid gap-4 sm:grid-cols-3">

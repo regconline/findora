@@ -33,9 +33,9 @@ export default async function HelpPage() {
       <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {topics.map((t) => (
           <li key={t.href}>
-            <Link href={t.href} className="flex h-full gap-4 rounded-card border border-line bg-white p-5 hover:border-emerald-500/60">
+            <Link href={t.href} className="flex h-full gap-4 rounded-card border border-line bg-surface p-5 hover:border-emerald-500/60">
               <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700"><t.icon className="size-5" aria-hidden /></span>
-              <span><span className="block font-semibold text-navy-900">{t.title}</span><span className="text-sm text-muted">{t.text}</span></span>
+              <span><span className="block font-semibold text-heading">{t.title}</span><span className="text-sm text-muted">{t.text}</span></span>
             </Link>
           </li>
         ))}

@@ -10,11 +10,16 @@ import { FaqList } from "@/components/faq-list";
 import { JsonLd } from "@/components/json-ld";
 import { TrackOnMount } from "@/components/track";
 import { PostCard } from "@/components/post-card";
+import { HeroIllustration } from "@/components/hero-illustration";
 import { getBlogPosts, getCategories, getCategoryCounts, getFaqs, getListedLocations, getPopularServices, getRecentBusinesses } from "@/lib/data";
 import { env } from "@/lib/env";
 import { PROVINCES, SITE } from "@/lib/constants";
 
 export const revalidate = 300;
+export const metadata = {
+  alternates: { canonical: "/" },
+  description: "Search South African businesses by service, category and town. Compare services and prices, then call, WhatsApp or send an enquiry directly. Free listings for businesses.",
+};
 
 export default async function HomePage() {
   const [categories, counts, recent, locations, services, { posts }, faqs] = await Promise.all([
@@ -63,7 +68,8 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-navy-900">
         <div aria-hidden className="absolute inset-0 opacity-[0.07] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:28px_28px]" />
         <Container className="relative pt-14 pb-16 sm:pt-20 sm:pb-24">
-          <div className="max-w-3xl">
+          <HeroIllustration className="pointer-events-none absolute right-4 top-10 hidden w-[400px] animate-fade-in xl:block 2xl:w-[440px]" />
+          <div className="max-w-3xl animate-fade-up">
             <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/85">
               <MapPin className="size-3.5 text-emerald-500" aria-hidden /> Free business discovery across South Africa
             </p>
@@ -74,11 +80,11 @@ export default async function HomePage() {
               Discover businesses, explore services and connect with trusted service providers across South Africa.
             </p>
           </div>
-          <div className="mt-9 max-w-5xl">
+          <div className="relative mt-9 max-w-5xl animate-fade-up [animation-delay:120ms]">
             <SearchForm categories={categories.map((c) => ({ slug: c.slug, name: c.name }))} />
           </div>
           {services.length ? (
-            <div className="mt-6 flex flex-wrap items-center gap-2 text-sm">
+            <div className="mt-6 flex flex-wrap items-center gap-2 text-sm animate-fade-up [animation-delay:220ms]">
               <span className="text-white/60">Popular:</span>
               {services.slice(0, 5).map((s) => (
                 <Link key={s.slug} href={`/categories/${s.category_slug}/${s.slug}`} className="rounded-full border border-white/15 px-3 py-1 text-white/85 hover:border-white/40 hover:text-white">
@@ -93,18 +99,18 @@ export default async function HomePage() {
       {/* Popular categories */}
       <section className="py-16 sm:py-20">
         <Container>
-          <SectionHeading eyebrow="Browse" title="Popular business categories" description="Explore businesses by the type of service you need." action={<LinkButton href="/categories" variant="outline">All categories <ArrowRight /></LinkButton>} />
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          <SectionHeading className="reveal" eyebrow="Browse" title="Popular business categories" description="Explore businesses by the type of service you need." action={<LinkButton href="/categories" variant="outline">All categories <ArrowRight /></LinkButton>} />
+          <ul className="reveal grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {popularCats.map((c) => {
               const n = counts.byCategory.get(c.id) ?? 0;
               return (
                 <li key={c.id}>
-                  <Link href={`/categories/${c.slug}`} className="group flex h-full items-center gap-3 rounded-card border border-line bg-white p-4 transition-colors hover:border-emerald-500/50">
+                  <Link href={`/categories/${c.slug}`} className="lift group flex h-full items-center gap-3 rounded-card border border-line bg-surface p-4 hover:border-emerald-500/50">
                     <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700 transition-colors group-hover:bg-emerald-500 group-hover:text-white">
                       <CategoryIcon name={c.icon} className="size-5" />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-sm font-semibold leading-snug text-navy-900">{c.name}</span>
+                      <span className="block text-sm font-semibold leading-snug text-heading">{c.name}</span>
                       <span className="text-xs text-muted">{n ? `${n} listing${n === 1 ? "" : "s"}` : "Be the first to list"}</span>
                     </span>
                   </Link>
@@ -116,9 +122,9 @@ export default async function HomePage() {
       </section>
 
       {/* Recently added */}
-      <section className="border-y border-line bg-white py-16 sm:py-20">
+      <section className="border-y border-line bg-surface py-16 sm:py-20">
         <Container>
-          <SectionHeading eyebrow="New on Findora" title="Recently added businesses" action={recent.length ? <LinkButton href="/businesses?sort=recent" variant="outline">View all <ArrowRight /></LinkButton> : undefined} />
+          <SectionHeading className="reveal" eyebrow="New on Findora" title="Recently added businesses" action={recent.length ? <LinkButton href="/businesses?sort=recent" variant="outline">View all <ArrowRight /></LinkButton> : undefined} />
           {recent.length ? (
             <BusinessGrid items={recent} />
           ) : (
@@ -130,24 +136,24 @@ export default async function HomePage() {
       {/* Locations */}
       <section className="py-16 sm:py-20">
         <Container>
-          <SectionHeading eyebrow="Near you" title="Find businesses by location" description="Choose a province or a town to see businesses that serve that area." />
+          <SectionHeading className="reveal" eyebrow="Near you" title="Find businesses by location" description="Choose a province or a town to see businesses that serve that area." />
           <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
             <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-2">
               {PROVINCES.map((p) => (
                 <li key={p}>
-                  <Link href={`/businesses?province=${encodeURIComponent(p)}`} className="flex items-center gap-2 rounded-lg border border-line bg-white px-3 py-2.5 text-sm font-medium text-navy-900 hover:border-emerald-500/50">
+                  <Link href={`/businesses?province=${encodeURIComponent(p)}`} className="flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2.5 text-sm font-medium text-heading hover:border-emerald-500/50">
                     <MapPin className="size-4 text-emerald-600" aria-hidden /> {p}
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="rounded-card border border-line bg-white p-5">
+            <div className="rounded-card border border-line bg-surface p-5">
               <h3 className="text-sm font-semibold">Towns and cities with listings</h3>
               {locations.length ? (
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {locations.slice(0, 24).map((l) => (
                     <li key={`${l.province}-${l.city}`}>
-                      <Link href={`/businesses?province=${encodeURIComponent(l.province)}&city=${encodeURIComponent(l.city)}`} className="inline-flex items-center gap-1.5 rounded-full bg-canvas px-3 py-1.5 text-sm text-navy-900 hover:bg-emerald-50">
+                      <Link href={`/businesses?province=${encodeURIComponent(l.province)}&city=${encodeURIComponent(l.city)}`} className="inline-flex items-center gap-1.5 rounded-full bg-canvas px-3 py-1.5 text-sm text-heading hover:bg-emerald-50">
                         {l.city} <span className="text-xs text-muted">{l.business_count}</span>
                       </Link>
                     </li>
@@ -162,16 +168,16 @@ export default async function HomePage() {
       </section>
 
       {/* Popular services */}
-      <section className="border-y border-line bg-white py-16 sm:py-20">
+      <section className="border-y border-line bg-surface py-16 sm:py-20">
         <Container>
-          <SectionHeading eyebrow="Services" title="Popular services" description="Services offered by businesses on Findora." action={<LinkButton href="/services" variant="outline">Services directory <ArrowRight /></LinkButton>} />
+          <SectionHeading className="reveal" eyebrow="Services" title="Popular services" description="Services offered by businesses on Findora." action={<LinkButton href="/services" variant="outline">Services directory <ArrowRight /></LinkButton>} />
           <ul className="flex flex-wrap gap-2">
             {(services.length
               ? services.map((s) => ({ name: s.name, href: `/categories/${s.category_slug}/${s.slug}` }))
               : categories.flatMap((c) => (c.subcategories ?? []).slice(0, 1).map((s) => ({ name: s.name, href: `/categories/${c.slug}/${s.slug}` })))
             ).map((s) => (
               <li key={s.href}>
-                <Link href={s.href} className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-medium text-navy-900 hover:border-emerald-500 hover:text-emerald-700">{s.name}</Link>
+                <Link href={s.href} className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-medium text-heading hover:border-emerald-500 hover:text-emerald-700">{s.name}</Link>
               </li>
             ))}
           </ul>
@@ -183,14 +189,14 @@ export default async function HomePage() {
       {/* How it works */}
       <section className="py-16 sm:py-20" id="how-it-works">
         <Container>
-          <SectionHeading eyebrow="How Findora works" title="From search to conversation in minutes" />
-          <ol className="grid gap-4 md:grid-cols-3">
+          <SectionHeading className="reveal" eyebrow="How Findora works" title="From search to conversation in minutes" />
+          <ol className="reveal grid gap-4 md:grid-cols-3">
             {[
               { icon: Search, title: "Search", text: "Search by business name, service or keyword, then narrow results by category and location." },
               { icon: Eye, title: "Compare", text: "Review services, prices where provided, operating hours, photos and contact details on each profile." },
               { icon: PhoneCall, title: "Connect directly", text: "Call, WhatsApp, email or send an enquiry. You deal with the business directly — Findora takes no commission." },
             ].map((s, i) => (
-              <li key={s.title} className="rounded-card border border-line bg-white p-6">
+              <li key={s.title} className="lift rounded-card border border-line bg-surface p-6">
                 <div className="flex items-center gap-3">
                   <span className="grid size-10 place-items-center rounded-xl bg-navy-900 text-white"><s.icon className="size-5" aria-hidden /></span>
                   <span className="text-sm font-semibold text-muted">Step {i + 1}</span>
@@ -226,7 +232,7 @@ export default async function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl bg-white p-6 text-ink sm:p-8">
+          <div className="rounded-2xl bg-surface p-6 text-ink sm:p-8">
             <h2 className="text-2xl font-semibold">Create a free listing in 4 steps</h2>
             <ol className="mt-6 space-y-4">
               {[
@@ -238,7 +244,7 @@ export default async function HomePage() {
                 <li key={t} className="flex gap-3">
                   <span className="grid size-7 shrink-0 place-items-center rounded-full bg-emerald-50 text-sm font-semibold text-emerald-700">{i + 1}</span>
                   <div>
-                    <p className="font-semibold text-navy-900">{t}</p>
+                    <p className="font-semibold text-heading">{t}</p>
                     <p className="text-sm text-muted">{d}</p>
                   </div>
                 </li>
@@ -256,8 +262,8 @@ export default async function HomePage() {
       {posts.length ? (
         <section className="py-16 sm:py-20">
           <Container>
-            <SectionHeading eyebrow="Learn" title="Latest articles" description="Practical guides for customers and small businesses." action={<LinkButton href="/blog" variant="outline">Visit the blog <ArrowRight /></LinkButton>} />
-            <ul className="grid gap-5 md:grid-cols-3">
+            <SectionHeading className="reveal" eyebrow="Learn" title="Latest articles" description="Practical guides for customers and small businesses." action={<LinkButton href="/blog" variant="outline">Visit the blog <ArrowRight /></LinkButton>} />
+            <ul className="reveal grid gap-5 md:grid-cols-3">
               {posts.map((p) => (
                 <li key={p.id}><PostCard post={p} /></li>
               ))}
@@ -268,7 +274,7 @@ export default async function HomePage() {
 
       {/* FAQ */}
       {homeFaqs.length ? (
-        <section className="border-t border-line bg-white py-16 sm:py-20">
+        <section className="border-t border-line bg-surface py-16 sm:py-20">
           <Container className="grid gap-10 lg:grid-cols-[1fr_2fr]">
             <div>
               <h2 className="text-3xl font-semibold">Frequently asked questions</h2>
@@ -282,7 +288,7 @@ export default async function HomePage() {
       {/* CTA */}
       <section className="py-16 sm:py-20">
         <Container>
-          <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-line bg-white p-8 sm:flex-row sm:items-center sm:p-10">
+          <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-line bg-surface p-8 sm:flex-row sm:items-center sm:p-10">
             <div className="flex items-start gap-4">
               <Image src="/brand/findora-icon.png" alt="" width={56} height={56} className="hidden size-14 sm:block" />
               <div>

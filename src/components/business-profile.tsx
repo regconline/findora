@@ -46,9 +46,9 @@ export function ContactActions({ b, preview = false, enquiryHref = "#enquiry" }:
           </ContactAnchor>)
         : null}
       <a href={enquiryHref} className={cn(btn, "bg-emerald-500 text-white hover:bg-emerald-600", preview && "pointer-events-none")}><Mail aria-hidden /> Send Enquiry</a>
-      {show && b.email ? wrap(<ContactAnchor href={`mailto:${b.email}`} event={ev("email")} className={cn(btn, "border border-line bg-white text-navy-900 hover:bg-canvas")}><Mail aria-hidden /> Email</ContactAnchor>) : null}
-      {b.website ? wrap(<ContactAnchor href={b.website} target="_blank" rel="noopener nofollow" event={ev("website")} className={cn(btn, "border border-line bg-white text-navy-900 hover:bg-canvas")}><Globe aria-hidden /> Visit Website</ContactAnchor>) : null}
-      {dir ? wrap(<ContactAnchor href={dir} target="_blank" rel="noopener" event={ev("directions")} className={cn(btn, "border border-line bg-white text-navy-900 hover:bg-canvas")}><Navigation aria-hidden /> Get Directions</ContactAnchor>) : null}
+      {show && b.email ? wrap(<ContactAnchor href={`mailto:${b.email}`} event={ev("email")} className={cn(btn, "border border-line bg-surface text-heading hover:bg-canvas")}><Mail aria-hidden /> Email</ContactAnchor>) : null}
+      {b.website ? wrap(<ContactAnchor href={b.website} target="_blank" rel="noopener nofollow" event={ev("website")} className={cn(btn, "border border-line bg-surface text-heading hover:bg-canvas")}><Globe aria-hidden /> Visit Website</ContactAnchor>) : null}
+      {dir ? wrap(<ContactAnchor href={dir} target="_blank" rel="noopener" event={ev("directions")} className={cn(btn, "border border-line bg-surface text-heading hover:bg-canvas")}><Navigation aria-hidden /> Get Directions</ContactAnchor>) : null}
     </div>
   );
 }
@@ -102,7 +102,7 @@ export function BusinessBody({ b }: { b: BusinessProfile }) {
     <div className="space-y-6">
       <Card className="p-6">
         <h2 className="text-lg font-semibold">About {b.name}</h2>
-        {b.tagline ? <p className="mt-2 font-medium text-navy-900">{b.tagline}</p> : null}
+        {b.tagline ? <p className="mt-2 font-medium text-heading">{b.tagline}</p> : null}
         <div className="mt-3 whitespace-pre-line leading-relaxed text-ink/85">{b.description}</div>
         <dl className="mt-5 grid gap-3 border-t border-line pt-5 text-sm sm:grid-cols-3">
           {type ? (<div className="flex items-center gap-2"><Building className="size-4 text-muted" aria-hidden /><dt className="sr-only">Business type</dt><dd>{type}</dd></div>) : null}
@@ -122,7 +122,7 @@ export function BusinessBody({ b }: { b: BusinessProfile }) {
                   {img ? <Image src={img} alt={s.name} width={80} height={80} sizes="80px" className="size-20 shrink-0 rounded-lg object-cover" /> : null}
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                      <h3 className="font-semibold text-navy-900">{s.name}</h3>
+                      <h3 className="font-semibold text-heading">{s.name}</h3>
                       <p className="text-sm font-semibold text-emerald-700">{formatPrice(s.price, s.price_type)}</p>
                     </div>
                     {s.description ? <p className="mt-1 text-sm leading-relaxed text-ink/80">{s.description}</p> : null}
@@ -186,14 +186,14 @@ export function BusinessSidebar({ b }: { b: BusinessProfile }) {
         </ul>
         {loc?.service_areas?.length ? (
           <div className="mt-4 border-t border-line pt-4 text-sm">
-            <p className="font-medium text-navy-900">Also serves</p>
+            <p className="font-medium text-heading">Also serves</p>
             <p className="mt-1 text-muted">{loc.service_areas.join(", ")}</p>
           </div>
         ) : null}
         {socials.length ? (
           <div className="mt-4 flex gap-2 border-t border-line pt-4">
             {socials.map(({ href, label, Icon }) => (
-              <ContactAnchor key={label} href={href!} target="_blank" rel="noopener nofollow" aria-label={`${b.name} on ${label}`} event={{ type: "contact", business_id: b.id, event: "social" }} className="grid size-9 place-items-center rounded-lg border border-line text-navy-900 hover:bg-canvas">
+              <ContactAnchor key={label} href={href!} target="_blank" rel="noopener nofollow" aria-label={`${b.name} on ${label}`} event={{ type: "contact", business_id: b.id, event: "social" }} className="grid size-9 place-items-center rounded-lg border border-line text-heading hover:bg-canvas">
                 <Icon className="size-4" />
               </ContactAnchor>
             ))}
@@ -217,7 +217,7 @@ export function BusinessSidebar({ b }: { b: BusinessProfile }) {
               {DAYS.map((d, i) => {
                 const h = b.hours.find((x) => x.day_of_week === i);
                 return (
-                  <tr key={d} className={cn(i === today && "font-semibold text-navy-900")}>
+                  <tr key={d} className={cn(i === today && "font-semibold text-heading")}>
                     <th scope="row" className="py-1.5 text-left font-normal">{d}{i === today ? " (today)" : ""}</th>
                     <td className="py-1.5 text-right tabular-nums">{!h ? <span className="text-muted">—</span> : h.is_closed ? "Closed" : `${fmtTime(h.opens_at)} – ${fmtTime(h.closes_at)}`}</td>
                   </tr>
@@ -230,7 +230,7 @@ export function BusinessSidebar({ b }: { b: BusinessProfile }) {
 
       <p className="flex items-center gap-2 px-1 text-sm text-muted">
         <Flag className="size-4" aria-hidden />
-        <Link href={`/report?business=${b.slug}`} className="hover:text-navy-900 hover:underline">Report this listing</Link>
+        <Link href={`/report?business=${b.slug}`} className="hover:text-heading hover:underline">Report this listing</Link>
       </p>
     </div>
   );

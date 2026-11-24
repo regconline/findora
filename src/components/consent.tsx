@@ -92,7 +92,7 @@ export function ConsentAndAnalytics({ gaId, adsenseClient }: { gaId: string; ads
       ) : null}
 
       {open ? (
-        <div role="dialog" aria-modal="false" aria-labelledby="consent-title" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-xl rounded-2xl border border-line bg-white p-5 shadow-raised sm:inset-x-auto sm:right-5 sm:bottom-5">
+        <div role="dialog" aria-modal="false" aria-labelledby="consent-title" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-xl rounded-2xl border border-line bg-surface p-5 shadow-raised sm:inset-x-auto sm:right-5 sm:bottom-5">
           <h2 id="consent-title" className="text-base font-semibold">Your privacy choices</h2>
           <p className="mt-1.5 text-sm text-muted">
             We use essential cookies to keep you signed in. With your permission we also use analytics cookies to improve Findora
@@ -108,9 +108,9 @@ export function ConsentAndAnalytics({ gaId, adsenseClient }: { gaId: string; ads
           ) : null}
           <div className="mt-4 flex flex-wrap gap-2">
             <button type="button" onClick={() => save({ analytics: true, ads: true })} className="h-9 rounded-lg bg-emerald-500 px-4 text-sm font-semibold text-white hover:bg-emerald-600">Accept all</button>
-            <button type="button" onClick={() => save({ analytics: false, ads: false })} className="h-9 rounded-lg border border-line px-4 text-sm font-semibold text-navy-900 hover:bg-canvas">Essential only</button>
+            <button type="button" onClick={() => save({ analytics: false, ads: false })} className="h-9 rounded-lg border border-line px-4 text-sm font-semibold text-heading hover:bg-canvas">Essential only</button>
             {custom ? (
-              <button type="button" onClick={() => save({ analytics, ads })} className="h-9 rounded-lg border border-line px-4 text-sm font-semibold text-navy-900 hover:bg-canvas">Save choices</button>
+              <button type="button" onClick={() => save({ analytics, ads })} className="h-9 rounded-lg border border-line px-4 text-sm font-semibold text-heading hover:bg-canvas">Save choices</button>
             ) : (
               <button type="button" onClick={() => setCustom(true)} className="h-9 px-2 text-sm font-medium text-emerald-700 hover:underline">Customise</button>
             )}

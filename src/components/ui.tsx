@@ -9,16 +9,16 @@ import { JsonLd } from "@/components/json-ld";
 // Button (shadcn/ui-style API)
 // ---------------------------------------------------------------------------
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60 [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-[color,background-color,border-color,transform] duration-200 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         primary: "bg-emerald-500 text-white hover:bg-emerald-600 active:bg-emerald-700",
-        navy: "bg-navy-900 text-white hover:bg-navy-800",
-        outline: "border border-line bg-white text-navy-900 hover:border-navy-900/30 hover:bg-canvas",
-        ghost: "text-navy-900 hover:bg-navy-900/5",
+        navy: "bg-navy-900 text-white hover:bg-navy-800 dark:bg-heading dark:text-canvas dark:hover:bg-heading/90",
+        outline: "border border-line bg-surface text-heading hover:border-navy-900/30 hover:bg-canvas",
+        ghost: "text-heading hover:bg-heading/5",
         danger: "bg-danger text-white hover:bg-danger/90",
-        "danger-outline": "border border-danger/30 bg-white text-danger hover:bg-danger-50",
+        "danger-outline": "border border-danger/30 bg-surface text-danger hover:bg-danger-50",
         link: "px-0 text-emerald-700 underline-offset-4 hover:underline",
       },
       size: {
@@ -51,7 +51,7 @@ export function Container({ className, ...props }: React.HTMLAttributes<HTMLDivE
 }
 
 export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("rounded-card border border-line bg-white shadow-card", className)} {...props} />;
+  return <div className={cn("rounded-card border border-line bg-surface shadow-card", className)} {...props} />;
 }
 
 export function CardHeader({ title, description, action, className }: { title: React.ReactNode; description?: React.ReactNode; action?: React.ReactNode; className?: string }) {
@@ -97,12 +97,12 @@ export function PageHeader({ title, description, children, className }: { title:
 const badgeVariants = cva("inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium [&_svg]:size-3.5", {
   variants: {
     tone: {
-      neutral: "bg-navy-900/5 text-navy-800",
+      neutral: "bg-heading/5 text-heading",
       success: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-500/20",
-      warning: "bg-amber-100 text-[#8a5a10]",
+      warning: "bg-amber-100 text-warn-ink",
       danger: "bg-danger-50 text-danger",
-      info: "bg-[#e8f1f7] text-navy-800",
-      sponsored: "bg-amber-100 text-[#8a5a10] ring-1 ring-amber-500/30",
+      info: "bg-heading/10 text-heading",
+      sponsored: "bg-amber-100 text-warn-ink ring-1 ring-amber-500/30",
     },
   },
   defaultVariants: { tone: "neutral" },
@@ -136,9 +136,9 @@ export function StatusBadge({ status }: { status: string }) {
 
 export function Alert({ tone = "info", title, children, className }: { tone?: "info" | "success" | "warning" | "danger"; title?: string; children?: React.ReactNode; className?: string }) {
   const tones = {
-    info: "border-navy-900/10 bg-[#eef4f7] text-navy-900",
+    info: "border-heading/10 bg-heading/5 text-heading",
     success: "border-emerald-500/25 bg-emerald-50 text-emerald-700",
-    warning: "border-amber-500/30 bg-amber-100/60 text-[#734a0c]",
+    warning: "border-amber-500/30 bg-amber-100/60 text-warn-ink",
     danger: "border-danger/25 bg-danger-50 text-danger",
   };
   return (
@@ -151,7 +151,7 @@ export function Alert({ tone = "info", title, children, className }: { tone?: "i
 
 export function EmptyState({ icon: Icon, title, description, action, className }: { icon?: LucideIcon; title: string; description?: string; action?: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("flex flex-col items-center rounded-card border border-dashed border-line bg-white px-6 py-12 text-center", className)}>
+    <div className={cn("flex flex-col items-center rounded-card border border-dashed border-line bg-surface px-6 py-12 text-center", className)}>
       {Icon ? (
         <div className="mb-4 grid size-12 place-items-center rounded-full bg-emerald-50 text-emerald-700">
           <Icon className="size-6" aria-hidden />
@@ -166,12 +166,12 @@ export function EmptyState({ icon: Icon, title, description, action, className }
 
 export function StatCard({ label, value, icon: Icon, hint }: { label: string; value: number | string; icon?: LucideIcon; hint?: string }) {
   return (
-    <Card className="p-5">
+    <Card className="p-5 animate-fade-up">
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted">{label}</p>
         {Icon ? <Icon className="size-4 text-emerald-600" aria-hidden /> : null}
       </div>
-      <p className="mt-2 text-2xl font-semibold text-navy-900 tabular-nums">{typeof value === "number" ? value.toLocaleString("en-ZA") : value}</p>
+      <p className="mt-2 text-2xl font-semibold text-heading tabular-nums">{typeof value === "number" ? value.toLocaleString("en-ZA") : value}</p>
       {hint ? <p className="mt-1 text-xs text-muted">{hint}</p> : null}
     </Card>
   );
@@ -190,9 +190,9 @@ export function Breadcrumbs({ items, className }: { items: { label: string; href
             <li key={i} className="flex items-center gap-1">
               {i > 0 ? <Sep className="size-3.5 text-muted/60" aria-hidden /> : null}
               {it.href && i < all.length - 1 ? (
-                <Link href={it.href} className="hover:text-navy-900 hover:underline">{it.label}</Link>
+                <Link href={it.href} className="hover:text-heading hover:underline">{it.label}</Link>
               ) : (
-                <span aria-current={i === all.length - 1 ? "page" : undefined} className="text-navy-900">{it.label}</span>
+                <span aria-current={i === all.length - 1 ? "page" : undefined} className="text-heading">{it.label}</span>
               )}
             </li>
           ))}
@@ -220,7 +220,7 @@ export function Pagination({ page, pages, hrefFor, className }: { page: number; 
   return (
     <nav aria-label="Pagination" className={cn("flex flex-wrap items-center justify-center gap-1", className)}>
       {page > 1 ? (
-        <Link className={cn(item, "border border-line bg-white hover:bg-canvas")} href={hrefFor(page - 1)} rel="prev">
+        <Link className={cn(item, "border border-line bg-surface hover:bg-canvas")} href={hrefFor(page - 1)} rel="prev">
           <ChevronLeft className="size-4" aria-hidden /> <span className="sr-only sm:not-sr-only sm:ml-1">Previous</span>
         </Link>
       ) : null}
@@ -232,14 +232,14 @@ export function Pagination({ page, pages, hrefFor, className }: { page: number; 
             key={p}
             href={hrefFor(p)}
             aria-current={p === page ? "page" : undefined}
-            className={cn(item, p === page ? "bg-navy-900 font-semibold text-white" : "border border-line bg-white hover:bg-canvas")}
+            className={cn(item, p === page ? "bg-navy-900 font-semibold text-white" : "border border-line bg-surface hover:bg-canvas")}
           >
             {p}
           </Link>
         ),
       )}
       {page < pages ? (
-        <Link className={cn(item, "border border-line bg-white hover:bg-canvas")} href={hrefFor(page + 1)} rel="next">
+        <Link className={cn(item, "border border-line bg-surface hover:bg-canvas")} href={hrefFor(page + 1)} rel="next">
           <span className="sr-only sm:not-sr-only sm:mr-1">Next</span> <ChevronRight className="size-4" aria-hidden />
         </Link>
       ) : null}

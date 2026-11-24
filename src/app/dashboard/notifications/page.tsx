@@ -35,7 +35,7 @@ export default async function NotificationsPage() {
               <li key={n.id} className={cn("px-5 py-4 sm:px-6", !n.read_at && "bg-emerald-50/40")}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className={cn("text-navy-900", !n.read_at ? "font-semibold" : "font-medium")}>{n.link ? <Link href={n.link} className="hover:underline">{n.title}</Link> : n.title}</p>
+                    <p className={cn("text-heading", !n.read_at ? "font-semibold" : "font-medium")}>{n.link ? <Link href={n.link} className="hover:underline">{n.title}</Link> : n.title}</p>
                     {n.body ? <p className="text-sm text-muted">{n.body}</p> : null}
                   </div>
                   <span className="shrink-0 text-xs text-muted">{formatDateTime(n.created_at)}</span>

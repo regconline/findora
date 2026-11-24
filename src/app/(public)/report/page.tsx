@@ -24,9 +24,9 @@ export default async function ReportPage({ searchParams }: { searchParams: Promi
           <h1 className="text-3xl font-bold sm:text-4xl">Report a business</h1>
           <p className="mt-3 text-lg text-muted">Help keep Findora trustworthy. Our moderation team reviews every report.</p>
           <div className="mt-6 space-y-3 text-sm leading-relaxed text-ink/85">
-            <p><strong className="text-navy-900">What happens next:</strong> we review the listing, may contact the business, and can correct, hide or remove information that breaks our <Link href="/listing-guidelines" className="text-emerald-700 underline">listing guidelines</Link>.</p>
-            <p><strong className="text-navy-900">Takedown requests:</strong> if a listing contains your personal information without permission, choose “Something else” and explain. We act on valid requests promptly.</p>
-            <p><strong className="text-navy-900">Emergencies:</strong> if you have been the victim of fraud, report it to the South African Police Service as well.</p>
+            <p><strong className="text-heading">What happens next:</strong> we review the listing, may contact the business, and can correct, hide or remove information that breaks our <Link href="/listing-guidelines" className="text-emerald-700 underline">listing guidelines</Link>.</p>
+            <p><strong className="text-heading">Takedown requests:</strong> if a listing contains your personal information without permission, choose “Something else” and explain. We act on valid requests promptly.</p>
+            <p><strong className="text-heading">Emergencies:</strong> if you have been the victim of fraud, report it to the South African Police Service as well.</p>
           </div>
         </div>
         <Card className="p-6 sm:p-8">
@@ -35,7 +35,7 @@ export default async function ReportPage({ searchParams }: { searchParams: Promi
             <>
               <div className="mb-6 flex items-center gap-3 rounded-xl bg-canvas p-3">
                 <BusinessLogo path={b.logo_path} name={b.name} size={44} />
-                <div><p className="text-xs text-muted">Reporting</p><p className="font-semibold text-navy-900">{b.name}</p></div>
+                <div><p className="text-xs text-muted">Reporting</p><p className="font-semibold text-heading">{b.name}</p></div>
               </div>
               <ActionForm action={submitReportAction} resetOnSuccess className="relative space-y-4">
                 <input type="hidden" name="business_id" value={b.id} />

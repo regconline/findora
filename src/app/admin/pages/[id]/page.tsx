@@ -23,7 +23,7 @@ export default async function EditSitePage({ params }: { params: Promise<{ id: s
   }
   return (
     <div className="space-y-6">
-      <Link href="/admin/pages" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-navy-900"><ArrowLeft className="size-4" aria-hidden /> Pages</Link>
+      <Link href="/admin/pages" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-heading"><ArrowLeft className="size-4" aria-hidden /> Pages</Link>
       <PageHeader title={page?.title ?? "New page"} description={page ? <Link href={`/${page.slug}`} target="_blank" className="underline">/{page.slug}</Link> : undefined} />
       <Card className="p-5 sm:p-6">
         <ActionForm action={saveSitePageAction.bind(null, isNew ? null : id)} className="space-y-5">

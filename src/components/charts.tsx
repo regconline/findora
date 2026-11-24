@@ -18,7 +18,7 @@ export function ColumnChart({ title, data, color = "#20B88A", className }: { tit
   return (
     <figure className={cn("min-w-0", className)}>
       <figcaption className="flex items-baseline justify-between">
-        <span className="text-sm font-semibold text-navy-900">{title}</span>
+        <span className="text-sm font-semibold text-heading">{title}</span>
         <span className="text-sm text-muted tabular-nums">{total.toLocaleString("en-ZA")} total</span>
       </figcaption>
       <svg viewBox={`0 0 ${W} ${H}`} className="mt-3 h-auto w-full" role="img" aria-label={`${title}: ${total} over ${data.length} days`}>

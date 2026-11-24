@@ -20,7 +20,7 @@ export default async function AdminPages() {
       <Table head={["Title", "URL", "Status", "Updated"]}>
         {(data ?? []).map((p) => (
           <tr key={p.id} className="hover:bg-canvas/60">
-            <td className="px-4 py-3"><Link href={`/admin/pages/${p.id}`} className="font-medium text-navy-900 hover:underline">{p.title}</Link></td>
+            <td className="px-4 py-3"><Link href={`/admin/pages/${p.id}`} className="font-medium text-heading hover:underline">{p.title}</Link></td>
             <td className="px-4 py-3 text-muted">/{p.slug}</td>
             <td className="px-4 py-3"><StatusBadge status={p.is_published ? "published" : "draft"} /></td>
             <td className="px-4 py-3 text-muted">{formatDateTime(p.updated_at)}</td>

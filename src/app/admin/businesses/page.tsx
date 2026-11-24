@@ -40,7 +40,7 @@ export default async function AdminBusinesses({ searchParams }: { searchParams: 
         {rows.map((b) => (
           <tr key={b.id} className="hover:bg-canvas/60">
             <td className="px-4 py-3">
-              <Link href={`/admin/businesses/${b.id}`} className="font-medium text-navy-900 hover:underline">{b.name}</Link>
+              <Link href={`/admin/businesses/${b.id}`} className="font-medium text-heading hover:underline">{b.name}</Link>
               {b.is_verified ? <BadgeCheck className="ml-1 inline size-4 text-emerald-600" aria-label="Verified" /> : null}
               {b.is_featured ? <Badge tone="sponsored" className="ml-2">Featured</Badge> : null}
             </td>

@@ -4,11 +4,11 @@ import { FacebookIcon as Facebook, InstagramIcon as Instagram, LinkedinIcon as L
 import { Container } from "@/components/ui";
 import { Logo } from "@/components/site-header";
 import { CookieSettingsButton } from "@/components/consent";
-import { getSettings, getCategories } from "@/lib/data";
+import { getSettings, getCategories, getBlogCategories } from "@/lib/data";
 import { SITE } from "@/lib/constants";
 
 export async function SiteFooter() {
-  const [settings, categories] = await Promise.all([getSettings(), getCategories()]);
+  const [settings, categories, blogCats] = await Promise.all([getSettings(), getCategories(), getBlogCategories()]);
   const year = new Date().getFullYear();
   const social = settings.social ?? {};
   const cols = [
@@ -18,6 +18,7 @@ export async function SiteFooter() {
         { href: "/about", label: "About" },
         { href: "/how-it-works", label: "How It Works" },
         { href: "/blog", label: "Blog" },
+        { href: "/services", label: "Services directory" },
         { href: "/contact", label: "Contact" },
         { href: "/site-map", label: "Sitemap" },
       ],
@@ -70,7 +71,7 @@ export async function SiteFooter() {
                 <h2 className="text-sm font-semibold text-white">{c.title}</h2>
                 <ul className="mt-3 space-y-2.5 text-sm">
                   {c.links.map((l) => (
-                    <li key={l.href + l.label}><Link href={l.href} className="hover:text-white">{l.label}</Link></li>
+                    <li key={l.href + l.label}><Link href={l.href} className="transition-colors hover:text-white">{l.label}</Link></li>
                   ))}
                 </ul>
               </div>
@@ -83,6 +84,16 @@ export async function SiteFooter() {
             <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
               {categories.slice(0, 12).map((c) => (
                 <li key={c.id}><Link href={`/categories/${c.slug}`} className="hover:text-white">{c.name}</Link></li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+        {blogCats.length ? (
+          <div className="mt-8">
+            <h2 className="text-sm font-semibold text-white">Guides</h2>
+            <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+              {blogCats.map((c) => (
+                <li key={c.id}><Link href={`/blog/category/${c.slug}`} className="hover:text-white">{c.name}</Link></li>
               ))}
             </ul>
           </div>

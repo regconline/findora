@@ -29,7 +29,7 @@ export default async function AdminReports({ searchParams }: { searchParams: Pro
       <PageHeader title="Reports" description="Suspicious businesses, incorrect information, inappropriate photographs and spam." />
       <AdminFilters base="/admin/reports" status={sp.status} statuses={STATUSES} />
       <nav className="flex flex-wrap gap-2 text-sm">
-        {REPORT_REASONS.map((r) => <Link key={r.value} href={`/admin/reports?reason=${r.value}${sp.status ? `&status=${sp.status}` : ""}`} className={sp.reason === r.value ? "rounded-full bg-navy-900 px-3 py-1 text-white" : "rounded-full bg-white px-3 py-1 ring-1 ring-line"}>{r.label}</Link>)}
+        {REPORT_REASONS.map((r) => <Link key={r.value} href={`/admin/reports?reason=${r.value}${sp.status ? `&status=${sp.status}` : ""}`} className={sp.reason === r.value ? "rounded-full bg-navy-900 px-3 py-1 text-white" : "rounded-full bg-surface px-3 py-1 ring-1 ring-line"}>{r.label}</Link>)}
       </nav>
       {rows.length ? (
         <ul className="space-y-4">
@@ -39,7 +39,7 @@ export default async function AdminReports({ searchParams }: { searchParams: Pro
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
                     <StatusBadge status={r.status} />
-                    <span className="font-semibold text-navy-900">{REPORT_REASONS.find((x) => x.value === r.reason)?.label}</span>
+                    <span className="font-semibold text-heading">{REPORT_REASONS.find((x) => x.value === r.reason)?.label}</span>
                     <span className="text-xs text-muted">{formatDateTime(r.created_at)}</span>
                   </div>
                   <p className="mt-2 text-sm">{r.business ? <Link href={`/admin/businesses/${r.business.id}`} className="font-medium text-emerald-700 underline">{r.business.name}</Link> : "Business removed"}{r.business ? <> · <StatusBadge status={r.business.status} /></> : null}</p>

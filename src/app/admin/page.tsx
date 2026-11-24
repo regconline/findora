@@ -39,7 +39,7 @@ export default async function AdminOverview() {
           <CardHeader title="Awaiting approval" description="Oldest first" action={<Link href="/admin/businesses?status=pending" className="text-sm font-medium text-emerald-700">View all</Link>} />
           <ul className="divide-y divide-line">
             {((pending as unknown as P[]) ?? []).map((b) => (
-              <li key={b.id}><Link href={`/admin/businesses/${b.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-canvas sm:px-6"><span><span className="block font-medium text-navy-900">{b.name}</span><span className="text-xs text-muted">{b.categories?.name} · submitted {formatDateTime(b.submitted_at)}</span></span><StatusBadge status="pending" /></Link></li>
+              <li key={b.id}><Link href={`/admin/businesses/${b.id}`} className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-canvas sm:px-6"><span><span className="block font-medium text-heading">{b.name}</span><span className="text-xs text-muted">{b.categories?.name} · submitted {formatDateTime(b.submitted_at)}</span></span><StatusBadge status="pending" /></Link></li>
             ))}
             {!pending?.length ? <li className="px-6 py-8 text-center text-sm text-muted">No listings waiting. 🎉</li> : null}
           </ul>
@@ -48,7 +48,7 @@ export default async function AdminOverview() {
           <CardHeader title="Open reports" action={<Link href="/admin/reports" className="text-sm font-medium text-emerald-700">View all</Link>} />
           <ul className="divide-y divide-line">
             {((reports as unknown as R[]) ?? []).map((r) => (
-              <li key={r.id}><Link href="/admin/reports" className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-canvas sm:px-6"><span><span className="block font-medium text-navy-900">{r.business?.name ?? "Removed business"}</span><span className="text-xs text-muted">{r.reason.replace(/_/g, " ")} · {formatDateTime(r.created_at)}</span></span><StatusBadge status={r.status} /></Link></li>
+              <li key={r.id}><Link href="/admin/reports" className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-canvas sm:px-6"><span><span className="block font-medium text-heading">{r.business?.name ?? "Removed business"}</span><span className="text-xs text-muted">{r.reason.replace(/_/g, " ")} · {formatDateTime(r.created_at)}</span></span><StatusBadge status={r.status} /></Link></li>
             ))}
             {!reports?.length ? <li className="px-6 py-8 text-center text-sm text-muted">No open reports.</li> : null}
           </ul>

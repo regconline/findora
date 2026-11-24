@@ -44,15 +44,15 @@ export default async function ServicePage({ params, searchParams }: Props) {
             {rows.map((s) => {
               const loc = s.business.business_locations?.[0];
               return (
-                <li key={s.id} className="relative flex gap-4 rounded-card border border-line bg-white p-5">
+                <li key={s.id} className="relative flex gap-4 rounded-card border border-line bg-surface p-5">
                   <BusinessLogo path={s.business.logo_path} name={s.business.name} size={48} />
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <h2 className="font-semibold text-navy-900">{s.name}</h2>
+                      <h2 className="font-semibold text-heading">{s.name}</h2>
                       <span className="text-sm font-semibold text-emerald-700">{formatPrice(s.price, s.price_type)}</span>
                     </div>
                     <p className="text-sm text-muted">
-                      <TrackedLink href={`/businesses/${s.business.slug}#services`} event={{ type: "view", business_id: s.business_id, service_id: s.id }} className="font-medium text-navy-900 after:absolute after:inset-0 hover:underline">{s.business.name}</TrackedLink>
+                      <TrackedLink href={`/businesses/${s.business.slug}#services`} event={{ type: "view", business_id: s.business_id, service_id: s.id }} className="font-medium text-heading after:absolute after:inset-0 hover:underline">{s.business.name}</TrackedLink>
                       {loc ? ` · ${loc.city}, ${loc.province}` : ""}
                     </p>
                     {s.description ? <p className="mt-2 line-clamp-2 text-sm text-ink/80">{s.description}</p> : null}

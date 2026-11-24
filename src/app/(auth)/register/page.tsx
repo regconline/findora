@@ -34,7 +34,7 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
         ].map((o) => (
           <Link key={o.href} href={o.href} className="group flex flex-col rounded-xl border border-line p-5 transition-colors hover:border-emerald-500">
             <span className="grid size-11 place-items-center rounded-xl bg-emerald-50 text-emerald-700"><o.icon className="size-5" aria-hidden /></span>
-            <span className="mt-4 font-semibold text-navy-900">{o.title}</span>
+            <span className="mt-4 font-semibold text-heading">{o.title}</span>
             <span className="mt-1 flex-1 text-sm text-muted">{o.text}</span>
             <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-emerald-700">Continue <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden /></span>
           </Link>

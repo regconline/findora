@@ -11,7 +11,7 @@ type Mode = "wizard" | "edit";
 function Footer({ mode, back, label }: { mode: Mode; back?: string; label?: string }) {
   return (
     <div className="mt-8 flex flex-col-reverse gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-      {back ? <Link href={back} className="text-center text-sm font-medium text-muted hover:text-navy-900">← Back</Link> : <span />}
+      {back ? <Link href={back} className="text-center text-sm font-medium text-muted hover:text-heading">← Back</Link> : <span />}
       <SubmitButton size="lg" pendingText="Saving…">{label ?? (mode === "wizard" ? "Save and continue" : "Save changes")}</SubmitButton>
     </div>
   );
@@ -20,7 +20,7 @@ function Footer({ mode, back, label }: { mode: Mode; back?: string; label?: stri
 export function Section({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
   return (
     <fieldset className="space-y-4">
-      <legend className="mb-1 text-base font-semibold text-navy-900">{title}</legend>
+      <legend className="mb-1 text-base font-semibold text-heading">{title}</legend>
       {description ? <p className="-mt-2 text-sm text-muted">{description}</p> : null}
       {children}
     </fieldset>
@@ -153,7 +153,7 @@ export function ServiceForm({ action, service, categories, submitLabel }: { acti
         <SelectField name="price_type" label="Price type" defaultValue={service?.price_type ?? "quote"} options={PRICE_TYPES} />
         <TextField name="price" label="Price (R)" optional type="number" inputMode="decimal" min={0} step="0.01" defaultValue={service?.price} hint="Leave blank for quotation-only or free services." />
         <div className="space-y-1.5 sm:col-span-2">
-          <label className="block text-sm font-medium text-navy-900" htmlFor={`svc-img-${service?.id ?? "new"}`}>Service image <span className="font-normal text-muted">(optional)</span></label>
+          <label className="block text-sm font-medium text-heading" htmlFor={`svc-img-${service?.id ?? "new"}`}>Service image <span className="font-normal text-muted">(optional)</span></label>
           <input id={`svc-img-${service?.id ?? "new"}`} type="file" name="image" accept="image/jpeg,image/png,image/webp" className="block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-navy-900 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-white" />
           <p className="text-[13px] text-muted">JPG, PNG or WebP, up to 4 MB.</p>
         </div>

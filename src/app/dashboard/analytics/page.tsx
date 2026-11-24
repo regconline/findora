@@ -34,7 +34,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
     if (d !== 30) u.set("days", String(d));
     return `/dashboard/analytics${u.size ? `?${u}` : ""}`;
   };
-  const pill = (active: boolean) => cn("rounded-lg px-3 py-1.5 text-sm font-medium", active ? "bg-navy-900 text-white" : "text-muted hover:bg-white");
+  const pill = (active: boolean) => cn("rounded-lg px-3 py-1.5 text-sm font-medium", active ? "bg-navy-900 text-white" : "text-muted hover:bg-surface");
 
   return (
     <div className="space-y-6">

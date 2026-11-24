@@ -25,9 +25,9 @@ export default async function EditPost({ params, searchParams }: { params: Promi
   const live = (p.status === "published" || p.status === "scheduled") && p.published_at && new Date(p.published_at) <= new Date();
   return (
     <div className="space-y-6">
-      <Link href="/admin/blog" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-navy-900"><ArrowLeft className="size-4" aria-hidden /> Blog</Link>
+      <Link href="/admin/blog" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-heading"><ArrowLeft className="size-4" aria-hidden /> Blog</Link>
       <PageHeader title={p.title} description={<StatusBadge status={p.status} />}>
-        {live ? <Link href={`/blog/${p.slug}`} target="_blank" className="inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-white px-4 text-sm font-semibold"><ExternalLink className="size-4" aria-hidden /> View</Link> : null}
+        {live ? <Link href={`/blog/${p.slug}`} target="_blank" className="inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-surface px-4 text-sm font-semibold"><ExternalLink className="size-4" aria-hidden /> View</Link> : null}
         <form action={deleteBlogPostAction.bind(null, id)}><ConfirmButton variant="danger-outline" size="md" confirm="Delete this article permanently?">Delete</ConfirmButton></form>
       </PageHeader>
       {sp.saved ? <Alert tone="success">Article created.</Alert> : null}

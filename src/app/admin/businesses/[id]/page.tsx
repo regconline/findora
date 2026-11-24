@@ -31,9 +31,9 @@ export default async function AdminBusinessDetail({ params }: { params: Promise<
 
   return (
     <div className="space-y-6">
-      <Link href="/admin/businesses" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-navy-900"><ArrowLeft className="size-4" aria-hidden /> Businesses</Link>
+      <Link href="/admin/businesses" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-heading"><ArrowLeft className="size-4" aria-hidden /> Businesses</Link>
       <PageHeader title={b.name} description={<span className="inline-flex flex-wrap items-center gap-2"><StatusBadge status={b.deleted_at ? "deleted" : b.status} /> Created {formatDateTime(b.created_at)}{b.submitted_at ? ` · submitted ${formatDateTime(b.submitted_at)}` : ""}</span>}>
-        {b.status === "approved" && !b.deleted_at ? <Link href={`/businesses/${b.slug}`} target="_blank" className="inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-white px-4 text-sm font-semibold"><ExternalLink className="size-4" aria-hidden /> Public page</Link> : null}
+        {b.status === "approved" && !b.deleted_at ? <Link href={`/businesses/${b.slug}`} target="_blank" className="inline-flex h-10 items-center gap-2 rounded-lg border border-line bg-surface px-4 text-sm font-semibold"><ExternalLink className="size-4" aria-hidden /> Public page</Link> : null}
       </PageHeader>
 
       <Card>
@@ -74,7 +74,7 @@ export default async function AdminBusinessDetail({ params }: { params: Promise<
           <Card>
             <CardHeader title={`Services (${b.services.length})`} />
             <ul className="divide-y divide-line text-sm">
-              {b.services.map((s) => <li key={s.id} className="flex justify-between gap-3 px-5 py-3 sm:px-6"><span><strong className="text-navy-900">{s.name}</strong>{s.description ? <span className="block text-muted">{s.description}</span> : null}</span><span className="shrink-0 text-muted">{formatPrice(s.price, s.price_type)}</span></li>)}
+              {b.services.map((s) => <li key={s.id} className="flex justify-between gap-3 px-5 py-3 sm:px-6"><span><strong className="text-heading">{s.name}</strong>{s.description ? <span className="block text-muted">{s.description}</span> : null}</span><span className="shrink-0 text-muted">{formatPrice(s.price, s.price_type)}</span></li>)}
               {!b.services.length ? <li className="px-6 py-6 text-muted">No services.</li> : null}
             </ul>
           </Card>
@@ -98,7 +98,7 @@ export default async function AdminBusinessDetail({ params }: { params: Promise<
             <CardHeader title="Owners & managers" />
             <ul className="divide-y divide-line text-sm">
               {((members as unknown as M[]) ?? []).map((m) => m.profiles ? (
-                <li key={m.profiles.id} className="px-5 py-3"><Link href={`/admin/users/${m.profiles.id}`} className="font-medium text-navy-900 hover:underline">{m.profiles.full_name || m.profiles.email}</Link><span className="block text-muted">{m.profiles.email} · {m.role}{m.profiles.status !== "active" ? ` · ${m.profiles.status}` : ""}</span></li>
+                <li key={m.profiles.id} className="px-5 py-3"><Link href={`/admin/users/${m.profiles.id}`} className="font-medium text-heading hover:underline">{m.profiles.full_name || m.profiles.email}</Link><span className="block text-muted">{m.profiles.email} · {m.role}{m.profiles.status !== "active" ? ` · ${m.profiles.status}` : ""}</span></li>
               ) : null)}
             </ul>
           </Card>

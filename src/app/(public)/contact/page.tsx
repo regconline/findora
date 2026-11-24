@@ -21,9 +21,9 @@ export default async function ContactPage() {
           {page?.summary ? <p className="mt-3 text-lg text-muted">{page.summary}</p> : null}
           {page ? <div className="mt-6"><Markdown>{page.content}</Markdown></div> : null}
           <ul className="mt-8 space-y-4 text-sm">
-            <li className="flex gap-3"><Mail className="size-5 text-emerald-600" aria-hidden /><span><strong className="block text-navy-900">General enquiries</strong><a href={`mailto:${settings.contact_email}`} className="text-emerald-700 underline">{settings.contact_email}</a></span></li>
-            <li className="flex gap-3"><ShieldCheck className="size-5 text-emerald-600" aria-hidden /><span><strong className="block text-navy-900">Privacy and information requests</strong><a href={`mailto:${settings.privacy_email}`} className="text-emerald-700 underline">{settings.privacy_email}</a></span></li>
-            <li className="flex gap-3"><Clock className="size-5 text-emerald-600" aria-hidden /><span><strong className="block text-navy-900">Response time</strong>Usually within two working days</span></li>
+            <li className="flex gap-3"><Mail className="size-5 text-emerald-600" aria-hidden /><span><strong className="block text-heading">General enquiries</strong><a href={`mailto:${settings.contact_email}`} className="text-emerald-700 underline">{settings.contact_email}</a></span></li>
+            <li className="flex gap-3"><ShieldCheck className="size-5 text-emerald-600" aria-hidden /><span><strong className="block text-heading">Privacy and information requests</strong><a href={`mailto:${settings.privacy_email}`} className="text-emerald-700 underline">{settings.privacy_email}</a></span></li>
+            <li className="flex gap-3"><Clock className="size-5 text-emerald-600" aria-hidden /><span><strong className="block text-heading">Response time</strong>Usually within two working days</span></li>
           </ul>
         </div>
         <Card className="p-6 sm:p-8">

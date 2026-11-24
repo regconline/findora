@@ -7,7 +7,7 @@ import { Markdown } from "@/components/markdown";
 import { PostCard } from "@/components/post-card";
 import { AdSlot } from "@/components/ad-slot";
 import { JsonLd } from "@/components/json-ld";
-import { getAllPostSlugs, getBlogPost, getBlogPosts } from "@/lib/data";
+import { getAllPostSlugs, getBlogPost, getBlogPosts, getCategories } from "@/lib/data";
 import { env } from "@/lib/env";
 import { formatDate, isOptimizableImage } from "@/lib/utils";
 
@@ -54,6 +54,7 @@ export default async function ArticlePage({ params }: Props) {
     post.category_id ? getBlogPosts({ pageSize: 3, categoryId: post.category_id, excludeId: post.id }) : Promise.resolve({ posts: [] }),
     getBlogPosts({ pageSize: 4, excludeId: post.id }),
   ]);
+  const categories = (await getCategories()).slice(0, 8);
   const related = [...sameCat, ...latest.filter((l) => !sameCat.some((s) => s.id === l.id))].slice(0, 3);
   const [first, second] = splitForAd(post.content);
   const url = `${env.siteUrl}/blog/${post.slug}`;
@@ -71,7 +72,7 @@ export default async function ArticlePage({ params }: Props) {
           author: { "@type": "Organization", name: post.author_name },
           publisher: { "@type": "Organization", name: "Findora", logo: { "@type": "ImageObject", url: `${env.siteUrl}/brand/findora-icon.png` } },
           mainEntityOfPage: url,
-          ...(post.cover_image_url ? { image: [post.cover_image_url] } : {}),
+          ...(post.cover_image_url ? { image: [post.cover_image_url.startsWith("/") ? `${env.siteUrl}${post.cover_image_url}` : post.cover_image_url] } : {}),
         }}
       />
       <Container className="py-10">
@@ -82,7 +83,7 @@ export default async function ArticlePage({ params }: Props) {
             <h1 className="mt-2 text-3xl font-bold leading-tight sm:text-[2.6rem]">{post.title}</h1>
             <p className="mt-4 text-lg text-muted">{post.excerpt}</p>
             <p className="mt-5 text-sm text-muted">
-              By <span className="font-medium text-navy-900">{post.author_name}</span> · <time dateTime={post.published_at ?? undefined}>{formatDate(post.published_at)}</time> · {post.reading_minutes} min read
+              {post.updated_at && post.published_at && new Date(post.updated_at).getTime() - new Date(post.published_at).getTime() > 86400000 ? <>Updated <time dateTime={post.updated_at}>{formatDate(post.updated_at)}</time> · </> : null}By <span className="font-medium text-heading">{post.author_name}</span> · <time dateTime={post.published_at ?? undefined}>{formatDate(post.published_at)}</time> · {post.reading_minutes} min read
             </p>
           </header>
           {post.cover_image_url ? (
@@ -104,8 +105,16 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           </div>
         </article>
+        <nav aria-label="Browse business categories" className="mx-auto mt-10 max-w-3xl">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">Browse businesses by category</h2>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {categories.map((c) => (
+              <li key={c.id}><Link href={`/categories/${c.slug}`} className="inline-flex rounded-full border border-line bg-surface px-3 py-1.5 text-sm text-heading transition-colors hover:border-emerald-500">{c.name}</Link></li>
+            ))}
+          </ul>
+        </nav>
         {related.length ? (
-          <section className="mt-16">
+          <section className="reveal mt-16">
             <h2 className="mb-6 text-2xl font-semibold">Related articles</h2>
             <ul className="grid gap-6 md:grid-cols-3">{related.map((p) => <li key={p.id}><PostCard post={p} /></li>)}</ul>
           </section>

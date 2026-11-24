@@ -48,7 +48,7 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
               {ens.map((e) => (
                 <li key={e.id} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3 sm:px-6">
                   <div className="min-w-0">
-                    <p className="truncate font-medium text-navy-900">{e.subject}</p>
+                    <p className="truncate font-medium text-heading">{e.subject}</p>
                     <p className="text-sm text-muted">{e.business ? <Link href={`/businesses/${e.business.slug}`} className="hover:underline">{e.business.name}</Link> : "Business no longer listed"} · {formatDateTime(e.created_at)}</p>
                   </div>
                   <StatusBadge status={e.status === "new" ? "new" : "read"} />
@@ -113,7 +113,7 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
                     <li key={e.id}>
                       <Link href={`/dashboard/enquiries/${e.id}`} className="block px-5 py-3 hover:bg-canvas sm:px-6">
                         <div className="flex items-center justify-between gap-2">
-                          <p className="truncate font-medium text-navy-900">{e.subject}</p>
+                          <p className="truncate font-medium text-heading">{e.subject}</p>
                           {e.status === "new" ? <StatusBadge status="new" /> : null}
                         </div>
                         <p className="truncate text-sm text-muted">{e.name} · {truncate(e.message, 80)}</p>
@@ -135,7 +135,7 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
                     <li key={b.id} className="flex items-center gap-3 px-5 py-4 sm:px-6">
                       <BusinessLogo path={b.logo_path} name={b.name} size={40} />
                       <div className="min-w-0 flex-1">
-                        <Link href={`/dashboard/businesses/${b.id}`} className="block truncate text-sm font-semibold text-navy-900 hover:underline">{b.name}</Link>
+                        <Link href={`/dashboard/businesses/${b.id}`} className="block truncate text-sm font-semibold text-heading hover:underline">{b.name}</Link>
                         <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-canvas"><div className="h-full rounded-full bg-emerald-500" style={{ width: `${pct}%` }} /></div>
                       </div>
                       <span className="text-xs font-semibold tabular-nums text-muted">{pct}%</span>

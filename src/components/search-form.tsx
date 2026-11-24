@@ -66,7 +66,7 @@ export function SearchForm({
       role="search"
       onSubmit={() => setOpen(false)}
       className={cn(
-        "relative grid gap-2 rounded-2xl border border-line bg-white p-2 shadow-raised",
+        "relative grid gap-2 rounded-2xl border border-line bg-surface p-2 shadow-raised",
         hero ? "md:grid-cols-[1.6fr_1fr_1fr_auto]" : "md:grid-cols-[1.6fr_1fr_1fr_auto]",
       )}
     >
@@ -107,7 +107,7 @@ export function SearchForm({
           className={field}
         />
         {open && items.length > 0 ? (
-          <ul id={`${listId}-list`} role="listbox" className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-xl border border-line bg-white py-1 shadow-raised">
+          <ul id={`${listId}-list`} role="listbox" className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-xl border border-line bg-surface py-1 shadow-raised">
             {items.map((s, i) => {
               const Icon = icon[s.kind];
               return (

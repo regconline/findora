@@ -20,7 +20,7 @@ export default async function AdminCategory({ params }: { params: Promise<{ id: 
   const subs = (c.subcategories as { id: string; name: string; slug: string; description: string | null; sort_order: number; is_active: boolean }[]) ?? [];
   return (
     <div className="space-y-6">
-      <Link href="/admin/categories" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-navy-900"><ArrowLeft className="size-4" aria-hidden /> Categories</Link>
+      <Link href="/admin/categories" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-heading"><ArrowLeft className="size-4" aria-hidden /> Categories</Link>
       <PageHeader title={c.name} description={`/categories/${c.slug}`} />
       <Card>
         <CardHeader title="Category details" />
@@ -43,7 +43,7 @@ export default async function AdminCategory({ params }: { params: Promise<{ id: 
             <li key={s.id} className="px-5 py-4 sm:px-6">
               <details>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
-                  <span className="font-medium text-navy-900">{s.name} <span className="text-sm font-normal text-muted">/{s.slug}</span></span>
+                  <span className="font-medium text-heading">{s.name} <span className="text-sm font-normal text-muted">/{s.slug}</span></span>
                   <StatusBadge status={s.is_active ? "active" : "archived"} />
                 </summary>
                 <ActionForm action={saveSubcategoryAction.bind(null, id, s.id)} className="mt-4 grid gap-4 sm:grid-cols-3">

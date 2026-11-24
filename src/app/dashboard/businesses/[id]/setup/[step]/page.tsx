@@ -58,7 +58,7 @@ export default async function SetupStepPage({ params }: Props) {
         <nav aria-label="Listing sections" className="-mx-1 flex gap-1 overflow-x-auto pb-1">
           {WIZARD_STEPS.slice(1, 7).map((s) => (
             <Link key={s.key} href={`/dashboard/businesses/${id}/setup/${s.key}`} aria-current={s.key === step ? "page" : undefined}
-              className={s.key === step ? "shrink-0 rounded-lg bg-navy-900 px-3 py-1.5 text-sm font-medium text-white" : "shrink-0 rounded-lg px-3 py-1.5 text-sm font-medium text-muted hover:bg-white"}>
+              className={s.key === step ? "shrink-0 rounded-lg bg-navy-900 px-3 py-1.5 text-sm font-medium text-white" : "shrink-0 rounded-lg px-3 py-1.5 text-sm font-medium text-muted hover:bg-surface"}>
               {s.label}
             </Link>
           ))}
@@ -111,7 +111,7 @@ export default async function SetupStepPage({ params }: Props) {
               {profile.images.length ? (
                 <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {profile.images.map((img, i) => (
-                    <li key={img.id} className="overflow-hidden rounded-xl border border-line bg-white">
+                    <li key={img.id} className="overflow-hidden rounded-xl border border-line bg-surface">
                       <div className="relative aspect-[4/3] bg-canvas">
                         <Image src={storageUrl(img.bucket, img.storage_path)!} alt={img.alt_text} fill sizes="(min-width:1024px) 300px, 50vw" className="object-cover" />
                         {img.is_hidden ? <span className="absolute left-2 top-2 rounded bg-danger px-2 py-0.5 text-xs font-semibold text-white">Hidden by moderator</span> : null}
@@ -149,7 +149,7 @@ export default async function SetupStepPage({ params }: Props) {
                     <details className="group">
                       <summary className="flex cursor-pointer list-none flex-wrap items-center gap-3 [&::-webkit-details-marker]:hidden">
                         <div className="min-w-0 flex-1">
-                          <p className="font-semibold text-navy-900">{s.name} {!s.is_active ? <span className="ml-1 text-xs font-normal text-muted">(hidden)</span> : null}</p>
+                          <p className="font-semibold text-heading">{s.name} {!s.is_active ? <span className="ml-1 text-xs font-normal text-muted">(hidden)</span> : null}</p>
                           <p className="text-sm text-muted">{formatPrice(s.price, s.price_type)}{s.subcategory ? ` · ${s.subcategory.name}` : ""}</p>
                         </div>
                         <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700"><Pencil className="size-3.5" aria-hidden /> Edit</span>
@@ -185,7 +185,7 @@ export default async function SetupStepPage({ params }: Props) {
         <>
           <Checklist items={completeness} />
           <div className="overflow-hidden rounded-card border border-line bg-canvas">
-            <p className="flex items-center gap-2 border-b border-line bg-white px-5 py-3 text-sm font-medium text-muted"><Eye className="size-4" aria-hidden /> Preview — exactly what customers will see once published</p>
+            <p className="flex items-center gap-2 border-b border-line bg-surface px-5 py-3 text-sm font-medium text-muted"><Eye className="size-4" aria-hidden /> Preview — exactly what customers will see once published</p>
             <div className="pointer-events-none select-none" aria-hidden>
               <BusinessHeader b={profile} />
               <div className="grid gap-6 p-5 lg:grid-cols-[1fr_340px]">
@@ -208,7 +208,7 @@ export default async function SetupStepPage({ params }: Props) {
             <>
               <Checklist items={completeness} compact />
               <div className="mt-6 rounded-xl bg-canvas p-5 text-sm leading-relaxed text-ink/85">
-                <p className="font-semibold text-navy-900">Before you submit</p>
+                <p className="font-semibold text-heading">Before you submit</p>
                 <ul className="mt-2 list-disc space-y-1 pl-5">
                   <li>Your information is accurate and you are authorised to list this business.</li>
                   <li>Photos are your own or you have permission to use them.</li>
@@ -223,7 +223,7 @@ export default async function SetupStepPage({ params }: Props) {
               {business.status === "approved" ? <p className="mt-3 text-sm text-muted">Your listing is already published. You don&apos;t need to resubmit after edits — changes appear immediately.</p> : null}
             </>
           )}
-          {prev ? <Link href={prev} className="mt-6 inline-block text-sm font-medium text-muted hover:text-navy-900">← Back</Link> : null}
+          {prev ? <Link href={prev} className="mt-6 inline-block text-sm font-medium text-muted hover:text-heading">← Back</Link> : null}
         </Card>
       ) : null}
     </div>
@@ -234,7 +234,7 @@ function StepNav({ prev, next, nextLabel, nextDisabled }: { prev?: string; next?
   if (!prev && !next) return null;
   return (
     <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-      {prev ? <Link href={prev} className="text-center text-sm font-medium text-muted hover:text-navy-900">← Back</Link> : <span />}
+      {prev ? <Link href={prev} className="text-center text-sm font-medium text-muted hover:text-heading">← Back</Link> : <span />}
       {next ? (
         nextDisabled ? (
           <p className="flex items-center gap-2 text-sm text-muted"><AlertTriangle className="size-4 text-amber-500" aria-hidden /> Add at least one service to continue.</p>
@@ -260,7 +260,7 @@ function Checklist({ items, compact }: { items: Awaited<ReturnType<typeof getCom
         {items.map((i) => (
           <li key={i.key} className="flex items-center gap-2 text-sm">
             {i.done ? <CheckCircle2 className="size-4 text-emerald-600" aria-hidden /> : <Circle className={i.required ? "size-4 text-danger" : "size-4 text-muted"} aria-hidden />}
-            {i.done ? <span>{i.label}</span> : <Link href={i.href} className="text-navy-900 underline decoration-line underline-offset-2 hover:decoration-navy-900">{i.label}</Link>}
+            {i.done ? <span>{i.label}</span> : <Link href={i.href} className="text-heading underline decoration-line underline-offset-2 hover:decoration-heading">{i.label}</Link>}
             {!i.done && i.required ? <span className="text-xs font-medium text-danger">Required</span> : null}
           </li>
         ))}

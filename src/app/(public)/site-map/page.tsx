@@ -1,14 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Container, Breadcrumbs } from "@/components/ui";
-import { getAllPostSlugs, getBlogPost, getCategories, getSitePages } from "@/lib/data";
+import { getAllPostSlugs, getCategories, getSitePages } from "@/lib/data";
 
 export const revalidate = 3600;
 export const metadata: Metadata = { title: "Sitemap", description: "An overview of every section of Findora.", alternates: { canonical: "/site-map" } };
 
 export default async function HtmlSitemap() {
   const [categories, pages, postSlugs] = await Promise.all([getCategories(), getSitePages(), getAllPostSlugs()]);
-  const posts = (await Promise.all(postSlugs.slice(0, 60).map((p) => getBlogPost(p.slug)))).filter(Boolean);
   const col = (title: string, links: { href: string; label: string }[]) => (
     <section>
       <h2 className="text-lg font-semibold">{title}</h2>
@@ -21,6 +20,7 @@ export default async function HtmlSitemap() {
       <h1 className="mt-4 text-3xl font-bold">Sitemap</h1>
       <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         {col("Discover", [
+          { href: "/blog/rss.xml", label: "Blog RSS feed" },
           { href: "/", label: "Home" }, { href: "/businesses", label: "Explore businesses" }, { href: "/categories", label: "Categories" },
           { href: "/services", label: "Services directory" }, { href: "/blog", label: "Blog" },
         ])}
@@ -35,7 +35,7 @@ export default async function HtmlSitemap() {
       </div>
       <div className="mt-12 grid gap-10 lg:grid-cols-2">
         {col("Business categories", categories.map((c) => ({ href: `/categories/${c.slug}`, label: c.name })))}
-        {col("Articles", posts.map((p) => ({ href: `/blog/${p!.slug}`, label: p!.title })))}
+        {col("Articles", postSlugs.map((p) => ({ href: `/blog/${p.slug}`, label: p.title })))}
       </div>
     </Container>
   );

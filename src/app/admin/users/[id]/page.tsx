@@ -26,7 +26,7 @@ export default async function AdminUserDetail({ params }: { params: Promise<{ id
   type M = { role: string; business: { id: string; name: string; status: string } | null };
   return (
     <div className="space-y-6">
-      <Link href="/admin/users" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-navy-900"><ArrowLeft className="size-4" aria-hidden /> Users</Link>
+      <Link href="/admin/users" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-heading"><ArrowLeft className="size-4" aria-hidden /> Users</Link>
       <PageHeader title={u.full_name || u.email} description={<span className="inline-flex items-center gap-2"><StatusBadge status={u.status} /> Joined {formatDateTime(u.created_at)}</span>} />
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
@@ -55,7 +55,7 @@ export default async function AdminUserDetail({ params }: { params: Promise<{ id
       <Card>
         <CardHeader title="Businesses" />
         <ul className="divide-y divide-line text-sm">
-          {((memberships as unknown as M[]) ?? []).map((m) => m.business ? <li key={m.business.id} className="flex items-center justify-between px-5 py-3 sm:px-6"><Link href={`/admin/businesses/${m.business.id}`} className="font-medium text-navy-900 hover:underline">{m.business.name}</Link><span className="flex items-center gap-2 text-muted">{m.role} <StatusBadge status={m.business.status} /></span></li> : null)}
+          {((memberships as unknown as M[]) ?? []).map((m) => m.business ? <li key={m.business.id} className="flex items-center justify-between px-5 py-3 sm:px-6"><Link href={`/admin/businesses/${m.business.id}`} className="font-medium text-heading hover:underline">{m.business.name}</Link><span className="flex items-center gap-2 text-muted">{m.role} <StatusBadge status={m.business.status} /></span></li> : null)}
           {!memberships?.length ? <li className="px-6 py-6 text-muted">No businesses.</li> : null}
         </ul>
       </Card>

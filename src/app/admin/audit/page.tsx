@@ -25,7 +25,7 @@ export default async function AdminAudit({ searchParams }: { searchParams: Promi
           <tr key={r.id} className="align-top">
             <td className="whitespace-nowrap px-4 py-2 text-muted">{formatDateTime(r.created_at)}</td>
             <td className="px-4 py-2">{r.actor_email ?? "—"}</td>
-            <td className="px-4 py-2 font-medium text-navy-900">{r.action}</td>
+            <td className="px-4 py-2 font-medium text-heading">{r.action}</td>
             <td className="px-4 py-2 text-muted">{r.entity_type}{r.entity_id ? <span className="block font-mono text-xs">{r.entity_id}</span> : null}</td>
             <td className="max-w-md px-4 py-2"><code className="block whitespace-pre-wrap break-all text-xs text-muted">{JSON.stringify(r.details)}</code></td>
           </tr>

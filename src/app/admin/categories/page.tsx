@@ -32,7 +32,7 @@ export default async function AdminCategories() {
                 <form action={moveCategoryAction.bind(null, c.id, "down")}><ConfirmButton variant="ghost" size="icon" disabled={i === rows.length - 1} aria-label={`Move ${c.name} down`}><ArrowDown /></ConfirmButton></form>
               </div>
             </td>
-            <td className="px-4 py-2"><Link href={`/admin/categories/${c.id}`} className="inline-flex items-center gap-2 font-medium text-navy-900 hover:underline"><CategoryIcon name={c.icon} className="size-4 text-emerald-600" /> {c.name}</Link></td>
+            <td className="px-4 py-2"><Link href={`/admin/categories/${c.id}`} className="inline-flex items-center gap-2 font-medium text-heading hover:underline"><CategoryIcon name={c.icon} className="size-4 text-emerald-600" /> {c.name}</Link></td>
             <td className="px-4 py-2 text-muted">{c.slug}</td>
             <td className="px-4 py-2 text-muted">{c.subcategories.length}</td>
             <td className="px-4 py-2 text-muted">{byCat.get(c.id) ?? 0}</td>

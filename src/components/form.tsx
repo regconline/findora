@@ -49,7 +49,7 @@ export function ActionForm({
 }
 
 const control =
-  "block w-full rounded-lg border border-line bg-white px-3.5 text-[15px] text-ink placeholder:text-muted/70 transition-colors focus:border-emerald-500 focus:outline-none focus:ring-3 focus:ring-emerald-500/15 disabled:bg-canvas aria-[invalid=true]:border-danger aria-[invalid=true]:ring-danger/10";
+  "block w-full rounded-lg border border-line bg-surface px-3.5 text-[15px] text-ink placeholder:text-muted/70 transition-colors focus:border-emerald-500 focus:outline-none focus:ring-3 focus:ring-emerald-500/15 disabled:bg-canvas aria-[invalid=true]:border-danger aria-[invalid=true]:ring-danger/10";
 
 type FieldProps = {
   name: string;
@@ -70,7 +70,7 @@ function useField(name: string, defaultValue?: string | number | null) {
 function FieldShell({ id, label, hint, optional, error, className, children }: FieldProps & { id: string; error?: string; children: React.ReactNode }) {
   return (
     <div className={cn("space-y-1.5", className)}>
-      <label htmlFor={id} className="block text-sm font-medium text-navy-900">
+      <label htmlFor={id} className="block text-sm font-medium text-heading">
         {label} {optional ? <span className="font-normal text-muted">(optional)</span> : null}
       </label>
       {children}

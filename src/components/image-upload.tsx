@@ -31,7 +31,7 @@ function Inner({ multiple = false, label, hint, currentUrl, aspect = "square" }:
   return (
     <>
       <label className="group block cursor-pointer">
-        <span className="mb-1.5 block text-sm font-medium text-navy-900">{label}</span>
+        <span className="mb-1.5 block text-sm font-medium text-heading">{label}</span>
         <div
           className={
             "grid place-items-center overflow-hidden rounded-xl border-2 border-dashed border-line bg-canvas text-muted transition-colors group-hover:border-emerald-500 " +

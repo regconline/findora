@@ -33,7 +33,7 @@ export default async function SavedPage() {
                 <Card className="flex items-start gap-4 p-5">
                   <BusinessLogo path={b!.logo_path} name={b!.name} size={48} />
                   <div className="min-w-0 flex-1">
-                    {live ? <Link href={`/businesses/${b!.slug}`} className="font-semibold text-navy-900 hover:underline">{b!.name}</Link> : <p className="font-semibold text-muted">{b!.name} (no longer listed)</p>}
+                    {live ? <Link href={`/businesses/${b!.slug}`} className="font-semibold text-heading hover:underline">{b!.name}</Link> : <p className="font-semibold text-muted">{b!.name} (no longer listed)</p>}
                     <p className="text-sm text-muted">{b!.categories?.name}</p>
                     {loc ? <p className="mt-1 flex items-center gap-1 text-sm text-muted"><MapPin className="size-3.5" aria-hidden /> {loc.city}, {loc.province}</p> : null}
                   </div>

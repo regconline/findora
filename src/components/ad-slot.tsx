@@ -26,7 +26,7 @@ export async function AdSlot({ placement, className }: { placement: Placement; c
   return (
     <aside aria-label="Advertisement" className={className}>
       <p className="mb-1 text-center text-[11px] font-medium uppercase tracking-widest text-muted">Advertisement</p>
-      <a href={ad.link_url} rel="sponsored noopener" target="_blank" className="block overflow-hidden rounded-card border border-line bg-white">
+      <a href={ad.link_url} rel="sponsored noopener" target="_blank" className="block overflow-hidden rounded-card border border-line bg-surface">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={ad.image_url} alt={ad.alt_text || ad.name} loading="lazy" className="mx-auto h-auto max-h-[250px] w-full object-contain" />
       </a>

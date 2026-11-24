@@ -9,7 +9,7 @@ import pathlib
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-OUT = ROOT / "supabase/migrations/20261124000007_seed_content.sql"
+OUT = ROOT / "supabase/migrations/20261124000009_content_v2.sql"  # 07 is the original seed already applied
 
 BLOG_CATEGORIES = [
     ("finding-services", "Finding Services", "How to find, compare and hire reliable businesses and professionals.", 10),
@@ -85,10 +85,16 @@ def main():
         words = len(body.split())
         days_ago = (len(articles) - i) * 3
         out.append(
-            "insert into public.blog_posts (slug, title, excerpt, content, category_id, author_name, status, published_at, seo_title, seo_description, reading_minutes) "
+            "insert into public.blog_posts (slug, title, excerpt, content, category_id, author_name, status, published_at, seo_title, seo_description, reading_minutes, cover_image_url, cover_image_alt) "
             f"select {q(meta['slug'])}, {q(meta['title'])}, {q(meta['excerpt'])}, {dq(body)}, c.id, 'Findora Editorial Team', 'published', now() - interval '{days_ago} days', "
-            f"{q(meta['title'][:70])}, {q(meta['excerpt'][:170])}, {max(1, round(words / 220))} "
+            f"{q(meta['title'][:70])}, {q(meta['excerpt'][:170])}, {max(1, round(words / 220))}, {q('/blog/covers/' + meta['slug'] + '.webp')}, {q('Illustration for the article: ' + meta['title'])} "
             f"from public.blog_categories c where c.slug = {q(meta['category'])} on conflict (slug) do nothing;"
+        )
+        # Attach covers to articles seeded earlier (never overwrite an admin-chosen image)
+        out.append(
+            f"update public.blog_posts set cover_image_url = {q('/blog/covers/' + meta['slug'] + '.webp')}, "
+            f"cover_image_alt = {q('Illustration for the article: ' + meta['title'])} "
+            f"where slug = {q(meta['slug'])} and cover_image_url is null;"
         )
 
     for path in sorted((ROOT / "content/pages").glob("*.md")):

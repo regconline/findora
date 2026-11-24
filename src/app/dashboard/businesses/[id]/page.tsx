@@ -59,10 +59,10 @@ export default async function ManageBusinessPage({ params, searchParams }: { par
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {sections.map((x) => (
           <li key={x.href}>
-            <Link href={x.href} className="flex h-full gap-4 rounded-card border border-line bg-white p-5 hover:border-emerald-500/60">
+            <Link href={x.href} className="flex h-full gap-4 rounded-card border border-line bg-surface p-5 hover:border-emerald-500/60">
               <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700"><x.icon className="size-5" aria-hidden /></span>
               <span>
-                <span className="block font-semibold text-navy-900">{x.title}</span>
+                <span className="block font-semibold text-heading">{x.title}</span>
                 <span className="text-sm text-muted">{x.text}</span>
               </span>
             </Link>

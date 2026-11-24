@@ -86,59 +86,59 @@ export default async function BusinessesPage({ searchParams }: { searchParams: P
     <form action="/businesses" method="get" className="space-y-5">
       {p.q ? <input type="hidden" name="q" value={p.q} /> : null}
       <label className="block text-sm">
-        <span className="mb-1.5 block font-medium text-navy-900">Category</span>
-        <select name="category" defaultValue={p.category} className="h-10 w-full rounded-lg border border-line bg-white px-3 text-sm">
+        <span className="mb-1.5 block font-medium text-heading">Category</span>
+        <select name="category" defaultValue={p.category} className="h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm">
           <option value="">All categories</option>
           {categories.map((c) => <option key={c.id} value={c.slug}>{c.name}</option>)}
         </select>
       </label>
       {cat?.subcategories?.length ? (
         <label className="block text-sm">
-          <span className="mb-1.5 block font-medium text-navy-900">Subcategory</span>
-          <select name="subcategory" defaultValue={p.subcategory} className="h-10 w-full rounded-lg border border-line bg-white px-3 text-sm">
+          <span className="mb-1.5 block font-medium text-heading">Subcategory</span>
+          <select name="subcategory" defaultValue={p.subcategory} className="h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm">
             <option value="">All in {cat.name}</option>
             {cat.subcategories.map((s) => <option key={s.id} value={s.slug}>{s.name}</option>)}
           </select>
         </label>
       ) : null}
       <label className="block text-sm">
-        <span className="mb-1.5 block font-medium text-navy-900">Province</span>
-        <select name="province" defaultValue={p.province} className="h-10 w-full rounded-lg border border-line bg-white px-3 text-sm">
+        <span className="mb-1.5 block font-medium text-heading">Province</span>
+        <select name="province" defaultValue={p.province} className="h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm">
           <option value="">All provinces</option>
           {PROVINCES.map((x) => <option key={x} value={x}>{x}</option>)}
         </select>
       </label>
       <label className="block text-sm">
-        <span className="mb-1.5 block font-medium text-navy-900">City or town</span>
-        <input name="city" defaultValue={p.city} list="city-options" placeholder="Any" className="h-10 w-full rounded-lg border border-line bg-white px-3 text-sm" />
+        <span className="mb-1.5 block font-medium text-heading">City or town</span>
+        <input name="city" defaultValue={p.city} list="city-options" placeholder="Any" className="h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm" />
         <datalist id="city-options">{cities.slice(0, 200).map((l) => <option key={`${l.province}-${l.city}`} value={l.city} />)}</datalist>
       </label>
       <label className="block text-sm">
-        <span className="mb-1.5 block font-medium text-navy-900">Business type</span>
-        <select name="type" defaultValue={p.type} className="h-10 w-full rounded-lg border border-line bg-white px-3 text-sm">
+        <span className="mb-1.5 block font-medium text-heading">Business type</span>
+        <select name="type" defaultValue={p.type} className="h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm">
           <option value="">Any type</option>
           {BUSINESS_TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
         </select>
       </label>
       <fieldset className="text-sm">
-        <legend className="mb-1.5 font-medium text-navy-900">Service price (R)</legend>
+        <legend className="mb-1.5 font-medium text-heading">Service price (R)</legend>
         <div className="grid grid-cols-2 gap-2">
-          <input name="min" type="number" min={0} inputMode="numeric" defaultValue={p.minPrice} placeholder="Min" aria-label="Minimum price" className="h-10 rounded-lg border border-line bg-white px-3" />
-          <input name="max" type="number" min={0} inputMode="numeric" defaultValue={p.maxPrice} placeholder="Max" aria-label="Maximum price" className="h-10 rounded-lg border border-line bg-white px-3" />
+          <input name="min" type="number" min={0} inputMode="numeric" defaultValue={p.minPrice} placeholder="Min" aria-label="Minimum price" className="h-10 rounded-lg border border-line bg-surface px-3" />
+          <input name="max" type="number" min={0} inputMode="numeric" defaultValue={p.maxPrice} placeholder="Max" aria-label="Maximum price" className="h-10 rounded-lg border border-line bg-surface px-3" />
         </div>
       </fieldset>
       <label className="flex items-center gap-2 text-sm">
         <input type="checkbox" name="weekends" value="1" defaultChecked={p.weekends} className="size-4 accent-emerald-600" /> Open on weekends
       </label>
       <label className="block text-sm">
-        <span className="mb-1.5 block font-medium text-navy-900">Sort by</span>
-        <select name="sort" defaultValue={p.sort} className="h-10 w-full rounded-lg border border-line bg-white px-3 text-sm">
+        <span className="mb-1.5 block font-medium text-heading">Sort by</span>
+        <select name="sort" defaultValue={p.sort} className="h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm">
           {SORT_OPTIONS.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
         </select>
       </label>
       <div className="flex gap-2">
         <button className="h-10 flex-1 rounded-lg bg-navy-900 text-sm font-semibold text-white hover:bg-navy-800">Apply filters</button>
-        <Link href={p.q ? `/businesses?q=${encodeURIComponent(p.q)}` : "/businesses"} className="grid h-10 place-items-center rounded-lg border border-line px-3 text-sm font-medium text-navy-900 hover:bg-canvas">Clear</Link>
+        <Link href={p.q ? `/businesses?q=${encodeURIComponent(p.q)}` : "/businesses"} className="grid h-10 place-items-center rounded-lg border border-line px-3 text-sm font-medium text-heading hover:bg-canvas">Clear</Link>
       </div>
     </form>
   );
@@ -146,7 +146,7 @@ export default async function BusinessesPage({ searchParams }: { searchParams: P
   return (
     <>
       {p.q ? <TrackOnMount event={{ type: "platform", event: "search", query: p.q, result_count: total }} /> : null}
-      <div className="border-b border-line bg-white">
+      <div className="border-b border-line bg-surface">
         <Container className="py-6">
           <Breadcrumbs items={[{ label: "Explore businesses" }]} />
           <h1 className="mt-3 text-2xl font-bold sm:text-3xl">{p.q ? <>Results for “{p.q}”</> : cat ? `${cat.name} businesses` : "Explore businesses"}</h1>
@@ -156,14 +156,14 @@ export default async function BusinessesPage({ searchParams }: { searchParams: P
       <Container className="py-8">
         <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
           <aside aria-label="Filters">
-            <details className="group rounded-card border border-line bg-white lg:hidden">
-              <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 font-semibold text-navy-900">
+            <details className="group rounded-card border border-line bg-surface lg:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 font-semibold text-heading">
                 <span className="flex items-center gap-2"><SlidersHorizontal className="size-4" aria-hidden /> Filters {chips.length ? `(${chips.length})` : ""}</span>
                 <span className="text-sm font-normal text-muted group-open:hidden">Show</span><span className="hidden text-sm font-normal text-muted group-open:inline">Hide</span>
               </summary>
               <div className="border-t border-line p-4">{filters}</div>
             </details>
-            <div className="hidden rounded-card border border-line bg-white p-5 lg:block">
+            <div className="hidden rounded-card border border-line bg-surface p-5 lg:block">
               <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold"><SlidersHorizontal className="size-4" aria-hidden /> Filter results</h2>
               {filters}
             </div>
@@ -172,13 +172,13 @@ export default async function BusinessesPage({ searchParams }: { searchParams: P
           <div className="min-w-0">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <p className="text-sm text-muted" aria-live="polite">
-                {total ? <><strong className="text-navy-900">{total.toLocaleString("en-ZA")}</strong> business{total === 1 ? "" : "es"} found</> : "No businesses found"}
+                {total ? <><strong className="text-heading">{total.toLocaleString("en-ZA")}</strong> business{total === 1 ? "" : "es"} found</> : "No businesses found"}
               </p>
               {chips.length ? (
                 <ul className="flex flex-wrap gap-2">
                   {chips.map((c) => (
                     <li key={c.label}>
-                      <Link href={c.href} className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-medium text-navy-900 ring-1 ring-line hover:ring-navy-900/30">
+                      <Link href={c.href} className="inline-flex items-center gap-1 rounded-full bg-surface px-3 py-1 text-xs font-medium text-heading ring-1 ring-line hover:ring-navy-900/30">
                         {c.label} <X className="size-3" aria-label="Remove filter" />
                       </Link>
                     </li>
@@ -189,7 +189,7 @@ export default async function BusinessesPage({ searchParams }: { searchParams: P
 
             {featuredHere.length ? (
               <section aria-labelledby="featured-h" className="mb-6 rounded-card border border-amber-500/30 bg-amber-100/30 p-4">
-                <h2 id="featured-h" className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#8a5a10]">Featured listings</h2>
+                <h2 id="featured-h" className="mb-3 text-xs font-semibold uppercase tracking-widest text-warn-ink">Featured listings</h2>
                 <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                   {featuredHere.map((b) => <li key={b.id}><BusinessCard b={b} label="featured" /></li>)}
                 </ul>

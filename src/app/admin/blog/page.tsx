@@ -29,7 +29,7 @@ export default async function AdminBlog() {
       <Table head={["Title", "Category", "Status", "Publication", "Updated"]}>
         {((posts as unknown as P[]) ?? []).map((p) => (
           <tr key={p.id} className="hover:bg-canvas/60">
-            <td className="px-4 py-3"><Link href={`/admin/blog/${p.id}`} className="font-medium text-navy-900 hover:underline">{p.title}</Link></td>
+            <td className="px-4 py-3"><Link href={`/admin/blog/${p.id}`} className="font-medium text-heading hover:underline">{p.title}</Link></td>
             <td className="px-4 py-3 text-muted">{p.blog_categories?.name ?? "—"}</td>
             <td className="px-4 py-3"><StatusBadge status={p.status === "scheduled" && p.published_at && new Date(p.published_at).getTime() <= now ? "published" : p.status} /></td>
             <td className="px-4 py-3 text-muted">{p.published_at ? formatDateTime(p.published_at) : "—"}</td>

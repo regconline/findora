@@ -3,6 +3,7 @@ import { Download } from "lucide-react";
 import { Card, CardHeader, Avatar } from "@/components/ui";
 import { ActionForm, CheckboxField, ConfirmButton, SelectField, SubmitButton, TextField, TextareaField } from "@/components/form";
 import { ImageUpload } from "@/components/image-upload";
+import { ThemeToggle } from "@/components/theme";
 import { requireUser } from "@/lib/auth";
 import { BUCKETS, PROVINCES } from "@/lib/constants";
 import { formatDate, formatPhone, storageUrl } from "@/lib/utils";
@@ -44,6 +45,11 @@ export default async function SettingsPage() {
       </Card>
 
       <Card>
+        <CardHeader title="Appearance" description="Choose light or dark mode, or follow your device setting." />
+        <div className="p-5 sm:p-6"><ThemeToggle full /></div>
+      </Card>
+
+      <Card>
         <CardHeader title="Password" />
         <ActionForm action={changePasswordAction} resetOnSuccess className="grid gap-4 p-5 sm:p-6 md:grid-cols-3">
           <TextField name="current_password" label="Current password" type="password" autoComplete="current-password" />
@@ -57,7 +63,7 @@ export default async function SettingsPage() {
         <CardHeader title="Your data" description="Under POPIA you may request a copy of your personal information at any time." />
         <div className="p-5 sm:p-6">
           { }
-          <a href="/api/account/export" download className="inline-flex h-10 items-center gap-2 rounded-lg border border-line px-4 text-sm font-semibold text-navy-900 hover:bg-canvas">
+          <a href="/api/account/export" download className="inline-flex h-10 items-center gap-2 rounded-lg border border-line px-4 text-sm font-semibold text-heading hover:bg-canvas">
             <Download className="size-4" aria-hidden /> Download my data (JSON)
           </a>
           <p className="mt-2 text-sm text-muted">Includes your profile, consents, saved businesses, enquiries and listings you manage.</p>

@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       (c.subcategories ?? []).filter((s) => (counts.bySub.get(s.id) ?? 0) > 0).map((s) => ({ url: u(`/categories/${c.slug}/${s.slug}`), changeFrequency: "daily" as const, priority: 0.7 })),
     ),
     ...businesses.map((b) => ({ url: u(`/businesses/${b.slug}`), lastModified: new Date(b.updated_at), changeFrequency: "weekly" as const, priority: 0.8 })),
-    ...posts.map((p) => ({ url: u(`/blog/${p.slug}`), lastModified: new Date(p.updated_at), changeFrequency: "monthly" as const, priority: 0.6 })),
+    ...posts.map((p) => ({ url: u(`/blog/${p.slug}`), lastModified: new Date(p.updated_at), changeFrequency: "monthly" as const, priority: 0.6, ...(p.cover_image_url ? { images: [p.cover_image_url.startsWith("/") ? u(p.cover_image_url) : p.cover_image_url] } : {}) })),
     ...blogCats.map((c) => ({ url: u(`/blog/category/${c.slug}`), changeFrequency: "weekly" as const, priority: 0.4 })),
   ];
 }

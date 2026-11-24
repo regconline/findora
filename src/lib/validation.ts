@@ -285,7 +285,7 @@ export const blogPostSchema = z.object({
   content: trimmed(50, 100000, "Content"),
   category_id: optionalUuid,
   author_name: trimmed(2, 80, "Author"),
-  cover_image_url: z.preprocess(emptyToUndef, z.string().url().max(500).optional()),
+  cover_image_url: z.preprocess(emptyToUndef, z.string().max(500).refine((v) => /^\/[\w\-./]+$/.test(v) || /^https:\/\//.test(v), "Use an https:// URL or a site path such as /blog/covers/image.webp").optional()),
   cover_image_alt: optionalText(200, "Image alt text"),
   status: z.enum(["draft", "scheduled", "published", "archived"]),
   published_at: z.preprocess(emptyToUndef, z.string().optional()),

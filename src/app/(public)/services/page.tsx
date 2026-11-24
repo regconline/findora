@@ -25,7 +25,7 @@ export default async function ServicesPage() {
           <ul className="flex flex-wrap gap-2">
             {popular.map((s) => (
               <li key={s.slug}>
-                <Link href={`/services/${s.slug}`} className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-navy-900 hover:border-emerald-500">
+                <Link href={`/services/${s.slug}`} className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-heading hover:border-emerald-500">
                   {s.name} <span className="text-xs text-muted">{s.count}</span>
                 </Link>
               </li>
@@ -36,7 +36,7 @@ export default async function ServicesPage() {
 
       <section className="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3">
         {categories.map((c) => (
-          <div key={c.id} className="mb-6 break-inside-avoid rounded-card border border-line bg-white p-5">
+          <div key={c.id} className="mb-6 break-inside-avoid rounded-card border border-line bg-surface p-5">
             <h2 className="flex items-center gap-2 text-base font-semibold">
               <CategoryIcon name={c.icon} className="size-4 text-emerald-600" /> {c.name}
             </h2>

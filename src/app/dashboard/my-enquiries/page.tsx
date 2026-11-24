@@ -23,7 +23,7 @@ export default async function MyEnquiriesPage({ searchParams }: { searchParams: 
     .limit(100);
   type Row = { id: string; subject: string; message: string; status: string; created_at: string; business: { name: string; slug: string } | null };
   const rows = (data as unknown as Row[]) ?? [];
-  const tab = (a: boolean) => cn("rounded-lg px-3 py-1.5 text-sm font-medium", a ? "bg-navy-900 text-white" : "text-muted hover:bg-white");
+  const tab = (a: boolean) => cn("rounded-lg px-3 py-1.5 text-sm font-medium", a ? "bg-navy-900 text-white" : "text-muted hover:bg-surface");
   return (
     <div className="space-y-6">
       <PageHeader title="My enquiries" description="Enquiries you've sent to businesses. Businesses reply to you directly by email or phone." />
@@ -37,7 +37,7 @@ export default async function MyEnquiriesPage({ searchParams }: { searchParams: 
             {rows.map((e) => (
               <li key={e.id} className="flex flex-wrap items-start gap-4 px-5 py-4 sm:px-6">
                 <div className="min-w-0 flex-1">
-                  <p className="font-semibold text-navy-900">{e.subject}</p>
+                  <p className="font-semibold text-heading">{e.subject}</p>
                   <p className="text-sm text-muted">
                     {e.business ? <Link href={`/businesses/${e.business.slug}`} className="hover:underline">{e.business.name}</Link> : "Business no longer listed"} · {formatDateTime(e.created_at)}
                   </p>

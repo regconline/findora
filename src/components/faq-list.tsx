@@ -7,10 +7,10 @@ import type { Faq } from "@/lib/types";
 export function FaqList({ faqs, structuredData = false }: { faqs: Faq[]; structuredData?: boolean }) {
   return (
     <div>
-      <div className="divide-y divide-line rounded-card border border-line bg-white">
+      <div className="divide-y divide-line rounded-card border border-line bg-surface">
         {faqs.map((f) => (
           <details key={f.id} className="group px-5 py-1 sm:px-6">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium text-navy-900 [&::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium text-heading [&::-webkit-details-marker]:hidden">
               {f.question}
               <ChevronDown className="size-4 shrink-0 text-muted transition-transform group-open:rotate-180" aria-hidden />
             </summary>

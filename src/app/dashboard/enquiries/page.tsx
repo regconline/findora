@@ -45,18 +45,18 @@ export default async function EnquiriesPage({ searchParams }: { searchParams: Pr
       <div className="flex flex-wrap items-center justify-between gap-3">
         <nav className="flex gap-1" aria-label="Enquiry folders">
           {TABS.map((t) => (
-            <Link key={t.key} href={link({ tab: t.key, page: undefined })} aria-current={tab === t.key ? "page" : undefined} className={cn("rounded-lg px-3 py-1.5 text-sm font-medium", tab === t.key ? "bg-navy-900 text-white" : "text-muted hover:bg-white")}>{t.label}</Link>
+            <Link key={t.key} href={link({ tab: t.key, page: undefined })} aria-current={tab === t.key ? "page" : undefined} className={cn("rounded-lg px-3 py-1.5 text-sm font-medium", tab === t.key ? "bg-navy-900 text-white" : "text-muted hover:bg-surface")}>{t.label}</Link>
           ))}
         </nav>
         {businesses.length > 1 ? (
           <form className="flex items-center gap-2 text-sm">
             <input type="hidden" name="tab" value={tab} />
             <label htmlFor="biz" className="text-muted">Business</label>
-            <select id="biz" name="business" defaultValue={sp.business ?? ""} className="h-9 rounded-lg border border-line bg-white px-2">
+            <select id="biz" name="business" defaultValue={sp.business ?? ""} className="h-9 rounded-lg border border-line bg-surface px-2">
               <option value="">All</option>
               {businesses.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
             </select>
-            <button className="h-9 rounded-lg border border-line bg-white px-3 font-medium">Filter</button>
+            <button className="h-9 rounded-lg border border-line bg-surface px-3 font-medium">Filter</button>
           </form>
         ) : null}
       </div>
@@ -69,7 +69,7 @@ export default async function EnquiriesPage({ searchParams }: { searchParams: Pr
                   <span aria-hidden className={cn("mt-2 size-2 shrink-0 rounded-full", e.status === "new" ? "bg-emerald-500" : "bg-transparent")} />
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <p className={cn("truncate text-navy-900", e.status === "new" ? "font-semibold" : "font-medium")}>{e.subject}</p>
+                      <p className={cn("truncate text-heading", e.status === "new" ? "font-semibold" : "font-medium")}>{e.subject}</p>
                       <span className="text-xs text-muted">{formatDateTime(e.created_at)}</span>
                     </div>
                     <p className="text-sm text-muted">{e.name}{businesses.length > 1 ? ` → ${names.get(e.business_id)}` : ""}</p>

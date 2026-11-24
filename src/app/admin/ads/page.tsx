@@ -54,7 +54,7 @@ export default async function AdminAds() {
             <li key={a.id} className="px-5 py-4 sm:px-6">
               <details>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
-                  <span><span className="font-medium text-navy-900">{a.name}</span> <span className="text-sm text-muted">· {AD_PLACEMENTS.find((p) => p.value === a.placement)?.label} · {a.provider}</span></span>
+                  <span><span className="font-medium text-heading">{a.name}</span> <span className="text-sm text-muted">· {AD_PLACEMENTS.find((p) => p.value === a.placement)?.label} · {a.provider}</span></span>
                   <StatusBadge status={a.is_active ? "active" : "archived"} />
                 </summary>
                 <ActionForm action={saveAdAction.bind(null, a.id)} className="mt-4 grid gap-4 sm:grid-cols-3">

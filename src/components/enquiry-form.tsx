@@ -56,7 +56,7 @@ function Fields({ me, businessName, services }: { me: Me | undefined; businessNa
           <label className="flex items-start gap-3 text-sm">
             <input type="checkbox" name="create_account" checked={createAccount} onChange={(e) => setCreateAccount(e.target.checked)} className="mt-0.5 size-[18px] accent-emerald-600" />
             <span>
-              <span className="font-medium text-navy-900">Create a free account to track this enquiry</span>
+              <span className="font-medium text-heading">Create a free account to track this enquiry</span>
               <span className="block text-[13px] text-muted">Optional. Save businesses and see your enquiry history. You accept the <Link href="/terms" className="underline">terms</Link>.</span>
             </span>
           </label>

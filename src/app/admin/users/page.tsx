@@ -31,7 +31,7 @@ export default async function AdminUsers({ searchParams }: { searchParams: Promi
       <Table head={["Name", "Email", "Role", "Status", "Joined"]}>
         {rows.map((u) => (
           <tr key={u.id} className="hover:bg-canvas/60">
-            <td className="px-4 py-3"><Link href={`/admin/users/${u.id}`} className="font-medium text-navy-900 hover:underline">{u.full_name || "—"}</Link></td>
+            <td className="px-4 py-3"><Link href={`/admin/users/${u.id}`} className="font-medium text-heading hover:underline">{u.full_name || "—"}</Link></td>
             <td className="px-4 py-3 text-muted">{u.email}</td>
             <td className="px-4 py-3"><Badge tone={u.role === "admin" ? "info" : "neutral"}>{u.role.replace("_", " ")}</Badge></td>
             <td className="px-4 py-3"><StatusBadge status={u.status} /></td>

@@ -29,7 +29,7 @@ export function GoogleAdUnit({ client, slot, className }: { client: string; slot
   return (
     <aside aria-label="Advertisement" className={className}>
     <p className="mb-1 text-center text-[11px] font-medium uppercase tracking-widest text-muted">Advertisement</p>
-    <div className="min-h-[100px] overflow-hidden rounded-card border border-dashed border-line bg-white/60 sm:min-h-[120px]">
+    <div className="min-h-[100px] overflow-hidden rounded-card border border-dashed border-line bg-surface/60 sm:min-h-[120px]">
       <ins
         ref={ref}
         className="adsbygoogle block"

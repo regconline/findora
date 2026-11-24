@@ -22,7 +22,7 @@ export default async function AdminMessages() {
             <li key={m.id}>
               <Card className="p-5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <p className="font-semibold text-navy-900">{m.name} <span className="font-normal text-muted">· {m.email} · {m.topic}</span></p>
+                  <p className="font-semibold text-heading">{m.name} <span className="font-normal text-muted">· {m.email} · {m.topic}</span></p>
                   <span className="flex items-center gap-2 text-xs text-muted">{formatDateTime(m.created_at)} <StatusBadge status={m.status === "new" ? "new" : "resolved"} /></span>
                 </div>
                 <p className="mt-3 whitespace-pre-wrap text-sm">{m.message}</p>

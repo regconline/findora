@@ -10,7 +10,7 @@ export function BusinessLogo({ path, name, size = 56, className }: { path: strin
   const src = storageUrl(BUCKETS.logos, path);
   const letters = name.split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase()).join("");
   return src ? (
-    <Image src={src} alt={`${name} logo`} width={size} height={size} sizes={`${size}px`} className={cn("shrink-0 rounded-xl border border-line bg-white object-contain", className)} style={{ width: size, height: size }} />
+    <Image src={src} alt={`${name} logo`} width={size} height={size} sizes={`${size}px`} className={cn("shrink-0 rounded-xl border border-line bg-surface object-contain", className)} style={{ width: size, height: size }} />
   ) : (
     <span aria-hidden className={cn("grid shrink-0 place-items-center rounded-xl bg-navy-900 font-semibold text-white", className)} style={{ width: size, height: size, fontSize: size / 3 }}>
       {letters}
@@ -21,7 +21,7 @@ export function BusinessLogo({ path, name, size = 56, className }: { path: strin
 export function BusinessCard({ b, label, trackSearch }: { b: SearchResult; label?: "featured" | "sponsored"; trackSearch?: boolean }) {
   const location = [b.suburb, b.city, b.province].filter(Boolean).join(", ");
   return (
-    <article className="group relative flex h-full flex-col rounded-card border border-line bg-white p-5 shadow-card transition-shadow hover:shadow-raised">
+    <article className="lift group relative flex h-full flex-col rounded-card border border-line bg-surface p-5 shadow-card">
       <div className="flex items-start gap-4">
         <BusinessLogo path={b.logo_path} name={b.name} />
         <div className="min-w-0 flex-1">
@@ -30,7 +30,7 @@ export function BusinessCard({ b, label, trackSearch }: { b: SearchResult; label
             {label === "sponsored" ? <Badge tone="sponsored">Sponsored</Badge> : null}
             {b.category_name ? <span className="text-xs font-medium text-emerald-700">{b.subcategory_name ?? b.category_name}</span> : null}
           </div>
-          <h3 className="mt-0.5 text-base font-semibold leading-snug text-navy-900">
+          <h3 className="mt-0.5 text-base font-semibold leading-snug text-heading">
             <TrackedLink
               href={`/businesses/${b.slug}`}
               event={trackSearch ? { type: "platform", event: "search_click", ref_id: b.id } : undefined}

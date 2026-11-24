@@ -33,17 +33,17 @@ export default async function EnquiryDetail({ params }: { params: Promise<{ id: 
 
   return (
     <div className="space-y-6">
-      <Link href="/dashboard/enquiries" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-navy-900"><ArrowLeft className="size-4" aria-hidden /> All enquiries</Link>
+      <Link href="/dashboard/enquiries" className="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-heading"><ArrowLeft className="size-4" aria-hidden /> All enquiries</Link>
       <PageHeader title={e.subject} description={<>To {e.business?.name} · {formatDateTime(e.created_at)} · <StatusBadge status={e.status} /></>} />
       <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
         <Card className="p-5 sm:p-6">
-          {e.service ? <p className="mb-3 text-sm text-muted">Regarding service: <strong className="text-navy-900">{e.service.name}</strong></p> : null}
+          {e.service ? <p className="mb-3 text-sm text-muted">Regarding service: <strong className="text-heading">{e.service.name}</strong></p> : null}
           <p className="whitespace-pre-wrap leading-relaxed">{e.message}</p>
         </Card>
         <div className="space-y-4">
           <Card className="p-5">
             <h2 className="text-sm font-semibold">Customer</h2>
-            <p className="mt-2 font-medium text-navy-900">{e.name}</p>
+            <p className="mt-2 font-medium text-heading">{e.name}</p>
             <p className="text-sm break-all text-muted">{e.email}</p>
             {e.phone ? <p className="text-sm text-muted">{formatPhone(e.phone)}</p> : null}
             <div className="mt-4 grid gap-2">

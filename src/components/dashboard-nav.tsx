@@ -34,7 +34,7 @@ export function DashboardNav({ items }: { items: NavItem[] }) {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                  active ? "bg-navy-900 text-white" : "text-ink/80 hover:bg-navy-900/5 hover:text-navy-900",
+                  active ? "bg-navy-900 text-white" : "text-ink/80 hover:bg-heading/5 hover:text-heading",
                 )}
               >
                 <Icon className="size-4 shrink-0" aria-hidden />

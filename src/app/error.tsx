@@ -14,7 +14,7 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
         <p className="mt-3 text-muted">An unexpected error occurred. Please try again. If the problem continues, contact us{error.digest ? ` and quote reference ${error.digest}` : ""}.</p>
         <div className="mt-6 flex justify-center gap-3">
           <button onClick={reset} className="h-10 rounded-lg bg-emerald-500 px-4 text-sm font-semibold text-white hover:bg-emerald-600">Try again</button>
-          <Link href="/" className="grid h-10 place-items-center rounded-lg border border-line px-4 text-sm font-semibold text-navy-900">Go home</Link>
+          <Link href="/" className="grid h-10 place-items-center rounded-lg border border-line px-4 text-sm font-semibold text-heading">Go home</Link>
         </div>
       </div>
     </main>

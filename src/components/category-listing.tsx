@@ -8,6 +8,8 @@ import { TrackOnMount } from "@/components/track";
 import { cn } from "@/lib/utils";
 import { PROVINCES } from "@/lib/constants";
 import type { Category, SearchResult, Subcategory } from "@/lib/types";
+import { JsonLd } from "@/components/json-ld";
+import { env } from "@/lib/env";
 
 export function CategoryListing({
   category, sub, results, total, page, pageSize, counts, province,
@@ -33,7 +35,20 @@ export function CategoryListing({
   return (
     <>
       <TrackOnMount event={{ type: "platform", event: "category_view", ref_id: sub?.id ?? category.id }} />
-      <div className="border-b border-line bg-white">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: `${title} in South Africa`,
+          url: `${env.siteUrl}${base}`,
+          description: sub?.description || category.description || undefined,
+          isPartOf: { "@type": "WebSite", name: "Findora", url: env.siteUrl },
+          ...(results.length
+            ? { mainEntity: { "@type": "ItemList", numberOfItems: total, itemListElement: results.map((b, i) => ({ "@type": "ListItem", position: (page - 1) * pageSize + i + 1, url: `${env.siteUrl}/businesses/${b.slug}`, name: b.name })) } }
+            : {}),
+        }}
+      />
+      <div className="border-b border-line bg-surface">
         <Container className="py-8">
           <Breadcrumbs items={[{ label: "Categories", href: "/categories" }, ...(sub ? [{ label: category.name, href: `/categories/${category.slug}` }] : []), { label: title }]} />
           <div className="mt-5 flex items-start gap-4">
@@ -47,7 +62,7 @@ export function CategoryListing({
             <ul className="mt-6 flex flex-wrap gap-2">
               {category.subcategories.map((s) => (
                 <li key={s.id}>
-                  <Link href={`/categories/${category.slug}/${s.slug}`} className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-sm text-navy-900 hover:border-emerald-500">
+                  <Link href={`/categories/${category.slug}/${s.slug}`} className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-sm text-heading hover:border-emerald-500">
                     {s.name} {counts.get(s.id) ? <span className="text-xs text-muted">{counts.get(s.id)}</span> : null}
                   </Link>
                 </li>

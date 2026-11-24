@@ -5,10 +5,10 @@ import type { BlogPost } from "@/lib/types";
 
 export function PostCard({ post }: { post: BlogPost }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-white">
+    <article className="lift group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface">
       {post.cover_image_url ? (
-        <div className="relative aspect-[16/9] bg-canvas">
-          <Image src={post.cover_image_url} alt={post.cover_image_alt || ""} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" unoptimized={!isOptimizableImage(post.cover_image_url)} />
+        <div className="relative aspect-[16/9] overflow-hidden bg-canvas">
+          <Image src={post.cover_image_url} alt={post.cover_image_alt || ""} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.04]" unoptimized={!isOptimizableImage(post.cover_image_url)} />
         </div>
       ) : (
         <div aria-hidden className="flex aspect-[16/9] items-end bg-navy-900 p-5">

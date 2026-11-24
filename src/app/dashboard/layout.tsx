@@ -6,6 +6,7 @@ import { Logo } from "@/components/site-header";
 import { Avatar } from "@/components/ui";
 import { DashboardNav, type NavItem } from "@/components/dashboard-nav";
 import { signOutAction } from "@/app/(auth)/actions";
+import { ThemeToggle } from "@/components/theme";
 import { storageUrl } from "@/lib/utils";
 import { BUCKETS } from "@/lib/constants";
 
@@ -53,21 +54,22 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="min-h-dvh lg:grid lg:grid-cols-[260px_1fr]">
-      <aside className="border-b border-line bg-white lg:sticky lg:top-0 lg:h-dvh lg:border-b-0 lg:border-r">
+      <aside className="border-b border-line bg-surface lg:sticky lg:top-0 lg:h-dvh lg:border-b-0 lg:border-r">
         <div className="flex h-16 items-center justify-between px-4 lg:px-5">
           <Link href="/" aria-label="Findora home"><Logo /></Link>
+          <ThemeToggle />
         </div>
         <DashboardNav items={items} />
         <div className="hidden border-t border-line p-4 lg:absolute lg:inset-x-0 lg:bottom-0 lg:block">
           <div className="flex items-center gap-3">
             <Avatar src={storageUrl(BUCKETS.avatars, profile.avatar_path)} name={profile.full_name || profile.email || "?"} />
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-navy-900">{profile.full_name || "Your account"}</p>
+              <p className="truncate text-sm font-semibold text-heading">{profile.full_name || "Your account"}</p>
               <p className="truncate text-xs text-muted">{profile.email}</p>
             </div>
           </div>
           <form action={signOutAction} className="mt-3">
-            <button className="w-full rounded-lg border border-line py-2 text-sm font-medium text-navy-900 hover:bg-canvas">Sign out</button>
+            <button className="w-full rounded-lg border border-line py-2 text-sm font-medium text-heading hover:bg-canvas">Sign out</button>
           </form>
         </div>
       </aside>

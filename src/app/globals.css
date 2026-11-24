@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (set on <html> before paint by the theme script). */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ---------------------------------------------------------------
-   Findora design tokens
+   Findora design tokens (light theme). Dark values are below.
    --------------------------------------------------------------- */
 @theme {
   --color-navy-950: #0a1d28;
@@ -16,9 +19,12 @@
   --color-amber-500: #f2a93b;
   --color-amber-100: #fdeed6;
   --color-canvas: #f4f7f8;
+  --color-surface: #ffffff;
   --color-ink: #172b36;
+  --color-heading: #102c3b;
   --color-muted: #687780;
   --color-line: #e5eaed;
+  --color-warn-ink: #7a4f0e;
   --color-danger: #c2410c;
   --color-danger-50: #fff4ed;
 
@@ -26,26 +32,69 @@
 
   --radius-card: 0.875rem;
   --shadow-card: 0 1px 2px rgb(16 44 59 / 0.04), 0 1px 3px rgb(16 44 59 / 0.06);
-  --shadow-raised: 0 4px 16px -4px rgb(16 44 59 / 0.12);
+  --shadow-raised: 0 8px 24px -8px rgb(16 44 59 / 0.18);
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.4s ease-out both;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
+
+/* Dark theme — same token names, so every component adapts automatically. */
+.dark {
+  color-scheme: dark;
+  --color-canvas: #0a161c;
+  --color-surface: #11222b;
+  --color-ink: #d5e0e5;
+  --color-heading: #f1f6f8;
+  --color-muted: #94a6ae;
+  --color-line: #233842;
+  --color-navy-900: #0f2a38;
+  --color-navy-800: #1a3f52;
+  --color-emerald-700: #3fd0a2;
+  --color-emerald-100: rgb(32 184 138 / 0.24);
+  --color-emerald-50: rgb(32 184 138 / 0.13);
+  --color-amber-100: rgb(242 169 59 / 0.16);
+  --color-warn-ink: #f4c57d;
+  --color-danger: #f0845a;
+  --color-danger-50: rgb(240 132 90 / 0.13);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-raised: 0 10px 30px -10px rgb(0 0 0 / 0.6);
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-canvas text-ink antialiased;
+    @apply bg-canvas text-ink antialiased transition-colors duration-300;
     font-family: var(--font-sans);
   }
   h1, h2, h3, h4 {
-    @apply text-navy-900 tracking-tight;
+    @apply text-heading tracking-tight;
   }
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-emerald-500;
   }
   ::selection {
-    @apply bg-emerald-100 text-navy-900;
+    @apply bg-emerald-100 text-heading;
+  }
+  input, select, textarea {
+    color-scheme: inherit;
   }
 }
 
@@ -60,13 +109,40 @@
   .prose-findora a { @apply font-medium text-emerald-700 underline decoration-emerald-500/40 underline-offset-4 hover:decoration-emerald-600; }
   .prose-findora ul { @apply list-disc pl-6 space-y-2; }
   .prose-findora ol { @apply list-decimal pl-6 space-y-2; }
-  .prose-findora blockquote { @apply border-l-4 border-emerald-500 bg-white px-5 py-3 text-muted; }
-  .prose-findora strong { @apply font-semibold text-navy-900; }
+  .prose-findora ul:has(input[type="checkbox"]) { @apply list-none pl-0; }
+  .prose-findora blockquote { @apply border-l-4 border-emerald-500 bg-surface px-5 py-3 text-muted; }
+  .prose-findora strong { @apply font-semibold text-heading; }
   .prose-findora table { @apply w-full text-sm; }
   .prose-findora th, .prose-findora td { @apply border border-line px-3 py-2 text-left; }
   .prose-findora hr { @apply my-10 border-line; }
+  .prose-findora img { @apply rounded-xl; }
+
+  /* Scroll-reveal: content fades up as it enters the viewport (progressive enhancement). */
+  .reveal { animation: var(--animate-fade-up); }
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+
+  /* Gentle lift for interactive cards */
+  .lift { @apply transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-raised; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Dark mode: navy "active" pills, tabs and solid buttons need more contrast on dark surfaces.
+   (Full-width navy sections — hero, footer — are <section>/<footer> and keep their colour.) */
+.dark :is(a, span, button, li, div).bg-navy-900.text-white,
+.dark :is(a, span, button, div).bg-navy-900.text-white:hover {
+  background-color: #2b6380;
+}
+
+/* Keyframes are also declared globally so arbitrary animate-[…] utilities can use them. */
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }

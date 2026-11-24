@@ -22,13 +22,13 @@ export default async function CategoriesPage() {
         {categories.map((c) => {
           const n = counts.byCategory.get(c.id) ?? 0;
           return (
-            <li key={c.id} className="rounded-card border border-line bg-white p-5">
+            <li key={c.id} className="rounded-card border border-line bg-surface p-5">
               <Link href={`/categories/${c.slug}`} className="group flex items-center gap-3">
                 <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700 group-hover:bg-emerald-500 group-hover:text-white">
                   <CategoryIcon name={c.icon} className="size-5" />
                 </span>
                 <span>
-                  <span className="block font-semibold text-navy-900 group-hover:text-emerald-700">{c.name}</span>
+                  <span className="block font-semibold text-heading group-hover:text-emerald-700">{c.name}</span>
                   <span className="text-xs text-muted">{n} listing{n === 1 ? "" : "s"}</span>
                 </span>
               </Link>

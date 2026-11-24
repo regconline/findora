@@ -297,8 +297,8 @@ export const getBlogPost = cache(async (slug: string) =>
 );
 
 export const getAllPostSlugs = cache(async () =>
-  safe("post_slugs", [] as { slug: string; updated_at: string }[], async () => {
-    const { data, error } = await db().from("blog_posts").select("slug, updated_at").lte("published_at", new Date().toISOString());
+  safe("post_slugs", [] as { slug: string; updated_at: string; cover_image_url: string | null; title: string }[], async () => {
+    const { data, error } = await db().from("blog_posts").select("slug, updated_at, cover_image_url, title").lte("published_at", new Date().toISOString()).order("published_at", { ascending: false });
     if (error) throw error;
     return data ?? [];
   }),
