@@ -42,6 +42,15 @@ const nextConfig: NextConfig = {
     return [
       { source: "/search", destination: "/businesses", permanent: true },
       { source: "/explore", destination: "/businesses", permanent: true },
+      { source: "/categories/accommodation-and-tourism/bandbs", destination: "/categories/accommodation-and-tourism/bed-and-breakfasts", permanent: true },
+      { source: "/services/bandbs", destination: "/services/bed-and-breakfasts", permanent: true },
+      { source: "/categories/events-and-entertainment/d-cor-and-hire", destination: "/categories/events-and-entertainment/decor-and-hire", permanent: true },
+      { source: "/services/d-cor-and-hire", destination: "/services/decor-and-hire", permanent: true },
+      { source: "/sitemap", destination: "/site-map", permanent: true },
+      { source: "/about-us", destination: "/about", permanent: true },
+      { source: "/privacy-policy", destination: "/privacy", permanent: true },
+      { source: "/terms-and-conditions", destination: "/terms", permanent: true },
+      { source: "/rss", destination: "/blog/rss.xml", permanent: true },
     ];
   },
 };

@@ -20,7 +20,7 @@ T = [
  ("Restaurants and Food","utensils","Restaurants, takeaways, caterers, bakeries and food producers.",
   ["Restaurants","Takeaways","Caterers","Bakeries","Coffee Shops","Butcheries","Food Trucks"]),
  ("Accommodation and Tourism","bed","Guesthouses, lodges, tour operators and travel services.",
-  ["Guesthouses","B&Bs","Lodges","Self-Catering","Tour Operators","Travel Agents","Venues"]),
+  ["Guesthouses","Bed and Breakfasts","Lodges","Self-Catering","Tour Operators","Travel Agents","Venues"]),
  ("Education and Training","graduation-cap","Schools, tutors, colleges, skills and driving schools.",
   ["Tutors","Early Childhood Development","Private Schools","Colleges","Skills Training","Driving Schools","Music Lessons"]),
  ("Technology and IT","laptop","IT support, web development, software and device repairs.",
@@ -42,7 +42,10 @@ T = [
  ("Other Services","layers","Businesses and services not listed elsewhere.",
   ["Funeral Services","Religious Organisations","NGOs and Community","Pet Services","Tailoring and Alterations","General Services"]),
 ]
-def slug(s): return re.sub(r'-+','-',re.sub(r'[^a-z0-9]+','-',s.lower().replace('&','and'))).strip('-')
+import unicodedata
+def slug(s):
+    s = unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode().lower().replace('&', ' and ')
+    return re.sub(r'-+', '-', re.sub(r'[^a-z0-9]+', '-', s)).strip('-')
 def q(s): return "'"+s.replace("'","''")+"'"
 out=["-- Seed: initial business categories and subcategories (editable in the admin dashboard)"]
 for i,(n,icon,d,subs) in enumerate(T):
