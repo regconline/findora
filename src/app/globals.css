@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Findora design tokens
+   --------------------------------------------------------------- */
+@theme {
+  --color-navy-950: #0a1d28;
+  --color-navy-900: #102c3b;
+  --color-navy-800: #17394b;
+  --color-navy-700: #21495e;
+  --color-emerald-700: #148a66;
+  --color-emerald-600: #189f77;
+  --color-emerald-500: #20b88a;
+  --color-emerald-100: #d6f3ea;
+  --color-emerald-50: #ecf9f5;
+  --color-amber-500: #f2a93b;
+  --color-amber-100: #fdeed6;
+  --color-canvas: #f4f7f8;
+  --color-ink: #172b36;
+  --color-muted: #687780;
+  --color-line: #e5eaed;
+  --color-danger: #c2410c;
+  --color-danger-50: #fff4ed;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-card: 0.875rem;
+  --shadow-card: 0 1px 2px rgb(16 44 59 / 0.04), 0 1px 3px rgb(16 44 59 / 0.06);
+  --shadow-raised: 0 4px 16px -4px rgb(16 44 59 / 0.12);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4 {
+    @apply text-navy-900 tracking-tight;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-emerald-500;
+  }
+  ::selection {
+    @apply bg-emerald-100 text-navy-900;
+  }
+}
+
+/* Long-form content rendered from the CMS (markdown) */
+@layer components {
+  .prose-findora {
+    @apply text-[1.0625rem] leading-8 text-ink;
+  }
+  .prose-findora > * + * { @apply mt-5; }
+  .prose-findora h2 { @apply mt-10 text-2xl font-semibold; }
+  .prose-findora h3 { @apply mt-8 text-xl font-semibold; }
+  .prose-findora a { @apply font-medium text-emerald-700 underline decoration-emerald-500/40 underline-offset-4 hover:decoration-emerald-600; }
+  .prose-findora ul { @apply list-disc pl-6 space-y-2; }
+  .prose-findora ol { @apply list-decimal pl-6 space-y-2; }
+  .prose-findora blockquote { @apply border-l-4 border-emerald-500 bg-white px-5 py-3 text-muted; }
+  .prose-findora strong { @apply font-semibold text-navy-900; }
+  .prose-findora table { @apply w-full text-sm; }
+  .prose-findora th, .prose-findora td { @apply border border-line px-3 py-2 text-left; }
+  .prose-findora hr { @apply my-10 border-line; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
