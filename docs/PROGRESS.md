@@ -2,6 +2,16 @@
 
 _Last updated: 24 November 2026_
 
+## Live environment (24 Nov 2026)
+
+| Item | Value |
+| --- | --- |
+| GitHub | `regconline/findora` (branch `main`, auto-deploys to Vercel) |
+| Supabase project | `findora` (ref `ibdhotnjcjswvuqkxsdc`, region eu-west-2 London, org REGC Digital). Migrations 01–08 applied; 20 categories, 138 subcategories, 12 articles, 10 pages, 15 FAQs seeded; RLS on every table |
+| Vercel project | `findora` in team "REGC 's projects"; functions in `lhr1` (London); production URL `https://findora-smoky.vercel.app` |
+| Env vars set | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (publishable key), `NEXT_PUBLIC_SITE_URL`, `ANALYTICS_SALT`, `EMAIL_FROM`, `NEXT_PUBLIC_ADSENSE_ENABLED=false` |
+| **Still needed (owner action)** | `SUPABASE_SERVICE_ROLE_KEY` (Supabase → Project Settings → API keys → secret key) and `RESEND_API_KEY` + `ADMIN_NOTIFICATION_EMAIL` in Vercel; Supabase Auth URL configuration and email templates; first admin promotion |
+
 ## Summary
 
 The full MVP codebase is built: public site, search, business onboarding, dashboards, enquiries, admin, CMS, SEO and AdSense infrastructure. The database layer (schema, Row Level Security, triggers, search) is verified by an automated SQL test suite on a real PostgreSQL 16 server. The app typechecks, lints cleanly and produces a successful production build.
